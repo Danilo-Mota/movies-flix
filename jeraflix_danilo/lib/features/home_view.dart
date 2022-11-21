@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../support/style/app_colors.dart';
 import '../support/utils/constants.dart';
 import '../support/utils/localize.dart';
 
@@ -29,15 +30,20 @@ class HomeView extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: viewModel.currentIndex,
             onTap: viewModel.didClickSelectedIndex,
+            showUnselectedLabels: false,
+            selectedItemColor: AppColors.green,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   label: l10n.home,
-                  icon: SvgPicture.asset(Constants.icHomePath)),
+                  activeIcon: SvgPicture.asset(Constants.icHomePath, color: AppColors.green),
+                  icon: SvgPicture.asset(Constants.icHomePath)), 
               BottomNavigationBarItem(
                   label: l10n.search,
+                  activeIcon: SvgPicture.asset(Constants.icSearchPath, color: AppColors.green),
                   icon: SvgPicture.asset(Constants.icSearchPath)),
               BottomNavigationBarItem(
                   label: l10n.profile,
+                  activeIcon: SvgPicture.asset(Constants.icProfilePath, color: AppColors.green),
                   icon: SvgPicture.asset(Constants.icProfilePath)),
             ],
           ),
