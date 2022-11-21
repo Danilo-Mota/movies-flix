@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'home_view.dart';
 
-
-
 abstract class HomeViewControllerProtocol extends HomeViewModelProtocol {}
 
 class HomeViewController extends StatefulWidget {
