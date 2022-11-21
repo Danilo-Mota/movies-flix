@@ -96,6 +96,24 @@ abstract class Localization {
   /// In pt, this message translates to:
   /// **'Jeraflix - Danilo'**
   String get appTitle;
+
+  /// No description provided for @home.
+  ///
+  /// In pt, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @search.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar'**
+  String get search;
+
+  /// No description provided for @profile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get profile;
 }
 
 class _LocalizationDelegate extends LocalizationsDelegate<Localization> {

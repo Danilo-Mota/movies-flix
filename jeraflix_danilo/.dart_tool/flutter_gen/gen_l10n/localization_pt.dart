@@ -6,4 +6,13 @@ class LocalizationPt extends Localization {
 
   @override
   String get appTitle => 'Jeraflix - Danilo';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get search => 'Buscar';
+
+  @override
+  String get profile => 'Perfil';
 }
