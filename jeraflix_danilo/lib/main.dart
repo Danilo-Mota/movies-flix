@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: AppTheme.theme,
-        initialRoute: MobileRouter.initialRoute,
-        routes: MobileRouter.routes,
-        supportedLocales: Localization.supportedLocales,
-        localizationsDelegates: Localization.localizationsDelegates,
-        onGenerateTitle: (context) => Localize.instance.of(context).appTitle);
+      theme: AppTheme.theme,
+      initialRoute: MobileRouter.initialRoute,
+      routes: MobileRouter.routes,
+      supportedLocales: Localization.supportedLocales,
+      localizationsDelegates: Localization.localizationsDelegates,
+      onGenerateTitle: (context) => Localize.instance.of(context).appTitle,
+    );
   }
 }

@@ -2,7 +2,7 @@
   "@@locale": "pt",
 
   "appTitle" : "Jeraflix - Danilo",
-  "home" : "Home",
-  "search" : "Buscar",
-  "profile" : "Perfil"
+  "homeTitle" : "Home",
+  "searchTitle" : "Buscar",
+  "profileTitle" : "Perfil"
 }

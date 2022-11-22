@@ -6,7 +6,6 @@ abstract class BottomNavigationViewControllerProtocol extends BottomNavigationVi
 
 class BottomNavigationViewController extends StatefulWidget {
   final BottomNavigationViewControllerProtocol viewModel;
-  static const String route = '/home';
 
   const BottomNavigationViewController({super.key, required this.viewModel});
 

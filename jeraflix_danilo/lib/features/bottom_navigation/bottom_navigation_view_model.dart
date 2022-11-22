@@ -8,7 +8,7 @@ class BottomNavigationViewModel extends BottomNavigationViewControllerProtocol {
   int get currentIndex => _currentIndex;
 
   @override
-  void didClickSelectedIndex(int index) {
+  void didTapSelectedIndex(int index) {
     _currentIndex = index;
     notifyListeners();
   }

@@ -8,7 +8,7 @@ import '../../support/utils/localize.dart';
 abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
   int get currentIndex;
 
-  void didClickSelectedIndex(int index);
+  void didTapSelectedIndex(int index);
 }
 
 class BottomNavigationView extends StatelessWidget {
@@ -30,26 +30,25 @@ class BottomNavigationView extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: AppColors.blackLight,
             currentIndex: viewModel.currentIndex,
-            onTap: viewModel.didClickSelectedIndex,
+            onTap: viewModel.didTapSelectedIndex,
             showUnselectedLabels: false,
             selectedItemColor: AppColors.green,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  label: l10n.home,
-                  activeIcon: SvgPicture.asset(AppImage.icHomePath, color: AppColors.green),
-                  icon: SvgPicture.asset(AppImage.icHomePath)),
-              BottomNavigationBarItem(
-                  label: l10n.search,
-                  activeIcon: SvgPicture.asset(AppImage.icSearchPath, color: AppColors.green),
-                  icon: SvgPicture.asset(AppImage.icSearchPath)),
-              BottomNavigationBarItem(
-                  label: l10n.profile,
-                  activeIcon: SvgPicture.asset(AppImage.icProfilePath, color: AppColors.green),
-                  icon: SvgPicture.asset(AppImage.icProfilePath)),
+            items: [
+              _bottomNavigationBarItem(l10n.homeTitle, AppImage.icHomePath),
+              _bottomNavigationBarItem(l10n.searchTitle, AppImage.icMagnifierPath),
+              _bottomNavigationBarItem(l10n.profileTitle, AppImage.icProfilePath),
             ],
           ),
         );
       },
+    );
+  }
+
+  BottomNavigationBarItem _bottomNavigationBarItem(String label, String iconPath) {
+    return BottomNavigationBarItem(
+      label: label,
+      activeIcon: SvgPicture.asset(iconPath, color: AppColors.green),
+      icon: SvgPicture.asset(iconPath),
     );
   }
 }

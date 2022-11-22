@@ -8,11 +8,11 @@ class LocalizationPt extends Localization {
   String get appTitle => 'Jeraflix - Danilo';
 
   @override
-  String get home => 'Home';
+  String get homeTitle => 'Home';
 
   @override
-  String get search => 'Buscar';
+  String get searchTitle => 'Buscar';
 
   @override
-  String get profile => 'Perfil';
+  String get profileTitle => 'Perfil';
 }
