@@ -1,6 +1,6 @@
-import 'home_view_controller.dart';
+import 'bottom_navigation_view_controller.dart';
 
-class HomeViewModel extends HomeViewControllerProtocol {
+class BottomNavigationViewModel extends BottomNavigationViewControllerProtocol {
 
   int _currentIndex = 0;
 

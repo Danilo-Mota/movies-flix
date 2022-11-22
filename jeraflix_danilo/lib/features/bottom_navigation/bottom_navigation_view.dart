@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../support/style/app_colors.dart';
-import '../support/style/app_image.dart';
-import '../support/utils/localize.dart';
+import '../../support/style/app_colors.dart';
+import '../../support/style/app_image.dart';
+import '../../support/utils/localize.dart';
 
-abstract class HomeViewModelProtocol with ChangeNotifier {
+abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
   int get currentIndex;
 
   void didClickSelectedIndex(int index);
 }
 
-class HomeView extends StatelessWidget {
-  final HomeViewModelProtocol viewModel;
+class BottomNavigationView extends StatelessWidget {
+  final BottomNavigationViewModelProtocol viewModel;
 
-  const HomeView({Key? key, required this.viewModel}) : super(key: key);
+  const BottomNavigationView({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
