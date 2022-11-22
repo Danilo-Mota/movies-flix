@@ -10,7 +10,9 @@ class MoviesRoutes extends MoviesRoutesProtocol {
 
   @override
   void getPopularMovies({Success? success, Failure? failure}) {
-    final endpoint = Endpoint(path: '/movie/popular', method: 'GET');
+    final queryParameters = {'api_key': ''};
+
+    final endpoint = Endpoint(path: '/movie/popular', method: 'GET', queryParameters: queryParameters);
     _provider.request(endpoint: endpoint, success: success, failure: failure);
   }
 }
