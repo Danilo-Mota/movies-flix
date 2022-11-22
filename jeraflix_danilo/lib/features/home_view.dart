@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../support/style/app_colors.dart';
-import '../support/utils/constants.dart';
+import '../support/style/app_image.dart';
 import '../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol with ChangeNotifier {
@@ -28,6 +28,7 @@ class HomeView extends StatelessWidget {
             index: viewModel.currentIndex,
           ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: AppColors.blackLight,
             currentIndex: viewModel.currentIndex,
             onTap: viewModel.didClickSelectedIndex,
             showUnselectedLabels: false,
@@ -35,16 +36,16 @@ class HomeView extends StatelessWidget {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   label: l10n.home,
-                  activeIcon: SvgPicture.asset(Constants.icHomePath, color: AppColors.green),
-                  icon: SvgPicture.asset(Constants.icHomePath)), 
+                  activeIcon: SvgPicture.asset(AppImage.icHomePath, color: AppColors.green),
+                  icon: SvgPicture.asset(AppImage.icHomePath)),
               BottomNavigationBarItem(
                   label: l10n.search,
-                  activeIcon: SvgPicture.asset(Constants.icSearchPath, color: AppColors.green),
-                  icon: SvgPicture.asset(Constants.icSearchPath)),
+                  activeIcon: SvgPicture.asset(AppImage.icSearchPath, color: AppColors.green),
+                  icon: SvgPicture.asset(AppImage.icSearchPath)),
               BottomNavigationBarItem(
                   label: l10n.profile,
-                  activeIcon: SvgPicture.asset(Constants.icProfilePath, color: AppColors.green),
-                  icon: SvgPicture.asset(Constants.icProfilePath)),
+                  activeIcon: SvgPicture.asset(AppImage.icProfilePath, color: AppColors.green),
+                  icon: SvgPicture.asset(AppImage.icProfilePath)),
             ],
           ),
         );
