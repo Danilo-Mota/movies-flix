@@ -1,5 +1,8 @@
 {
   "@@locale": "pt",
 
-  "appTitle" : "Jeraflix - Danilo"
+  "appTitle" : "Jeraflix - Danilo",
+  "homeTitle" : "Home",
+  "searchTitle" : "Buscar",
+  "profileTitle" : "Perfil"
 }
