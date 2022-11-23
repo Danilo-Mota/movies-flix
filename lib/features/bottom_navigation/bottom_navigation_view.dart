@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_image.dart';
 import '../../support/utils/localize.dart';
+import '../home/di/home_factory.dart';
 
 abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
   int get currentIndex;
@@ -13,8 +14,9 @@ abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
 
 class BottomNavigationView extends StatelessWidget {
   final BottomNavigationViewModelProtocol viewModel;
+  final StatefulWidget homeView = HomeFactory.home();
 
-  const BottomNavigationView({Key? key, required this.viewModel}) : super(key: key);
+  BottomNavigationView({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,9 @@ class BottomNavigationView extends StatelessWidget {
         return Scaffold(
           body: IndexedStack(
             index: viewModel.currentIndex,
+            children: [
+              homeView
+            ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: AppColors.blackLight,

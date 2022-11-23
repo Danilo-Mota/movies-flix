@@ -4,7 +4,7 @@ import '../bottom_navigation_view_controller.dart';
 import '../bottom_navigation_view_model.dart';
 
 class BottomNavigationFactory {
-  static const String route = '/home';
+  static const String route = '/bottomNavigation';
 
   static StatefulWidget bottomNavigation() {
     final viewModel = BottomNavigationViewModel();
