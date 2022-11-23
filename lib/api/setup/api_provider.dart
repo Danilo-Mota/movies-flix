@@ -25,8 +25,8 @@ class ApiProvider {
         queryParameters: endpoint.queryParameters,
       );
       success?.call(response.data);
-    } on DioError catch (e) {
-      failure?.call(e);
+    } on DioError catch (error) {
+      failure?.call(error);
     }
   }
 }

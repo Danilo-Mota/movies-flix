@@ -8,5 +8,5 @@ class Movies {
       : id = map['id'],
         title = map['title'],
         rating = map['rating'],
-        posterPath = map['posterPath'];
+        posterPath = map['poster_path'];
 }
