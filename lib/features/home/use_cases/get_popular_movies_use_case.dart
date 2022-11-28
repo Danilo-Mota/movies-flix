@@ -7,7 +7,7 @@ typedef Error = void Function(String error);
 typedef Success = void Function(MoviesResult popularMovies);
 
 abstract class GetPopularMoviesUseCaseProtocol {
-  void invoke({required Success success, required Error error});
+  void execute({required Success success, required Error error});
 }
 
 class GetPopularMoviesUseCase extends GetPopularMoviesUseCaseProtocol {
@@ -16,7 +16,7 @@ class GetPopularMoviesUseCase extends GetPopularMoviesUseCaseProtocol {
   GetPopularMoviesUseCase({required this.routes});
 
   @override
-  void invoke({required Success success, required Error error}) {
+  void execute({required Success success, required Error error}) {
     routes.getPopularMovies(
       success: (results) {
         final popularMovies = MoviesResult.fromMap(results);
