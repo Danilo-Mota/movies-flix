@@ -5,29 +5,50 @@ import 'items/home_item_view_model.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewControllerProtocol {
+  bool _isLoading = true;
+  bool _hasError = false;
+  String _errorMessage = '';
+  List<Movies> _movies = [];
   final GetPopularMoviesUseCase useCase;
-  List<Movies> movies = [];
 
   HomeViewModel({required this.useCase});
 
   @override
   List<HomeItemViewModelProtocol> get popularMovies {
-    return movies.map((popularMovie) {
+    return _movies.map((popularMovie) {
       return HomeItemViewModel(movie: popularMovie);
     }).toList();
   }
 
   @override
   void getPopularMovies() {
-    //Implementar loading
+    _showLoading(true);
+
     useCase.execute(
-      success: (results) {
-        movies = results.moviesResult;
-        notifyListeners();
-      },
-      error: (error) {
-        //Implementar erro
-      },
-    );
+        success: (results) {
+          _movies = results.moviesResult;
+          _showLoading(false);
+        },
+        error: (error) => _handleGetPopularMoviesError(error));
+  }
+
+  @override
+  String get errorMessage => _errorMessage;
+
+  @override
+  bool get hasError => _hasError;
+
+  @override
+  bool get isLoading => _isLoading;
+
+  void _handleGetPopularMoviesError(String errorMessage) {
+    _errorMessage = errorMessage;
+    _hasError = true;
+    _showLoading(false);
+  }
+
+  void _showLoading(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
   }
 }

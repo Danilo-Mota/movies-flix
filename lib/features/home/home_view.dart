@@ -4,6 +4,9 @@ import '../../support/components/movie_horizontal_list_view.dart';
 import 'items/home_item_view.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
+  String get errorMessage;
+  bool get isLoading;
+  bool get hasError;
   List<HomeItemViewModelProtocol> get popularMovies;
 }
 
@@ -23,10 +26,7 @@ class HomeView extends StatelessWidget {
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 27),
-                    _popularMovies()
-                  ],
+                  children: [const SizedBox(height: 28), _popularMovies()],
                 ),
               ),
             ),
