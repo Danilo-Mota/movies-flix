@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../features/home/items/home_item_view.dart';
-import '../style/app_colors.dart';
-import '../style/app_fonts.dart';
-import '../utils/localize.dart';
+import 'movie_item_view.dart';
+import '../../style/app_colors.dart';
+import '../../style/app_fonts.dart';
+import '../../utils/localize.dart';
 
 class MovieHorizontalList extends StatelessWidget {
-  final List<HomeItemViewModelProtocol> popularMovies;
+  final List<MovieItemViewHolderProtocol> movies;
 
-  const MovieHorizontalList({
-    super.key,
-    required this.popularMovies,
-  });
+  const MovieHorizontalList({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class MovieHorizontalList extends StatelessWidget {
           SizedBox(
             height: width / 1.4,
             child: ListView.builder(
-              itemCount: popularMovies.length,
+              itemCount: movies.length,
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (_, index) {
@@ -46,7 +43,7 @@ class MovieHorizontalList extends StatelessWidget {
                     ),
                     child: SizedBox(
                       width: width / 2.54,
-                      child: HomeItemView(viewModel: popularMovies[index]),
+                      child: MovieItemView(viewHolder: movies[index]),
                     ),
                   ),
                 );

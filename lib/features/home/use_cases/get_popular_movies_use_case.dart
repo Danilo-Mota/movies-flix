@@ -20,10 +20,10 @@ class GetPopularMoviesUseCase extends GetPopularMoviesUseCaseProtocol {
     routes.getPopularMovies(
       success: (results) {
         final popularMovies = MoviesResult.fromMap(results);
-        success.call(popularMovies);
+        success(popularMovies);
       },
       failure: (dioError) {
-        error.call(dioError.message);
+        error(dioError.message);
       },
     );
   }

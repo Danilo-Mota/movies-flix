@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../support/components/movie_horizontal_list_view.dart';
-import 'items/home_item_view.dart';
+import '../../support/components/movies_item/movie_horizontal_list_view.dart';
+import '../../support/style/app_colors.dart';
+import '../../support/style/app_fonts.dart';
+import '../../support/components/movies_item/movie_item_view.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
   String get errorMessage;
   bool get isLoading;
   bool get hasError;
-  List<HomeItemViewModelProtocol> get popularMovies;
+  List<MovieItemViewHolderProtocol> get popularMovies;
 }
 
 class HomeView extends StatelessWidget {
@@ -35,6 +37,20 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _popularMovies() {
-    return MovieHorizontalList(popularMovies: viewModel.popularMovies);
+    if (viewModel.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: AppColors.white,
+        ),
+      );
+    } else if(viewModel.hasError) {
+        return Center(
+        child: Text(
+         viewModel.errorMessage,
+         style: AppFonts.montserratSemibold(14, AppColors.white),
+        ),
+      );
+    }
+    return MovieHorizontalList(movies: viewModel.popularMovies);
   }
 }

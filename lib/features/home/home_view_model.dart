@@ -1,7 +1,8 @@
 import '../../model/movies.dart';
+import '../../model/movies_result.dart';
 import 'home_view_controller.dart';
-import 'items/home_item_view.dart';
-import 'items/home_item_view_model.dart';
+import '../../support/components/movies_item/movie_item_view.dart';
+import '../../support/components/movies_item/movie_item_view_holder.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewControllerProtocol {
@@ -14,9 +15,9 @@ class HomeViewModel extends HomeViewControllerProtocol {
   HomeViewModel({required this.useCase});
 
   @override
-  List<HomeItemViewModelProtocol> get popularMovies {
+  List<MovieItemViewHolderProtocol> get popularMovies {
     return _movies.map((popularMovie) {
-      return HomeItemViewModel(movie: popularMovie);
+      return MovieItemViewHolder(movie: popularMovie);
     }).toList();
   }
 
@@ -25,11 +26,8 @@ class HomeViewModel extends HomeViewControllerProtocol {
     _showLoading(true);
 
     useCase.execute(
-        success: (results) {
-          _movies = results.moviesResult;
-          _showLoading(false);
-        },
-        error: (error) => _handleGetPopularMoviesError(error));
+        success: (results) => _handleGetPopularMoviesSuccess(results),
+        error: (errorMessage) => _handleGetPopularMoviesError(errorMessage));
   }
 
   @override
@@ -40,6 +38,11 @@ class HomeViewModel extends HomeViewControllerProtocol {
 
   @override
   bool get isLoading => _isLoading;
+
+  void _handleGetPopularMoviesSuccess(MoviesResult results) {
+    _movies = results.moviesResult;
+    _showLoading(false);
+  }
 
   void _handleGetPopularMoviesError(String errorMessage) {
     _errorMessage = errorMessage;

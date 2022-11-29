@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../support/style/app_colors.dart';
-import '../../../support/style/app_fonts.dart';
-import '../../../support/utils/constants.dart';
+import '../../style/app_colors.dart';
+import '../../style/app_fonts.dart';
+import '../../utils/constants.dart';
 
-abstract class HomeItemViewModelProtocol {
+abstract class MovieItemViewHolderProtocol {
   String get title;
   String get posterPath;
 }
 
-class HomeItemView extends StatelessWidget {
-  final HomeItemViewModelProtocol viewModel;
+class MovieItemView extends StatelessWidget {
+  final MovieItemViewHolderProtocol viewHolder;
 
-  const HomeItemView({super.key, required this.viewModel});
+  const MovieItemView({super.key, required this.viewHolder});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class HomeItemView extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: Image.network(
-                '${Constants.imageBaseURL}${viewModel.posterPath}',
+                '${Constants.imageBaseURL}${viewHolder.posterPath}',
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,7 +33,7 @@ class HomeItemView extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          viewModel.title,
+          viewHolder.title,
           style: AppFonts.nunitoSemiBold(16, AppColors.white),
           maxLines: 2,
           textAlign: TextAlign.start,
