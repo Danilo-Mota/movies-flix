@@ -1,10 +1,10 @@
 import '../../../model/movies.dart';
 import 'movie_item_view.dart';
 
-class MovieItemViewHolder extends MovieItemViewHolderProtocol {
+class MovieItemViewModel extends MovieItemViewModelProtocol {
   final Movies movie;
 
-  MovieItemViewHolder({required this.movie});
+  MovieItemViewModel({required this.movie});
 
   @override
   String get posterPath => movie.posterPath;

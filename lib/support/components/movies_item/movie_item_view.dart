@@ -4,15 +4,15 @@ import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
 import '../../utils/constants.dart';
 
-abstract class MovieItemViewHolderProtocol {
+abstract class MovieItemViewModelProtocol {
   String get title;
   String get posterPath;
 }
 
 class MovieItemView extends StatelessWidget {
-  final MovieItemViewHolderProtocol viewHolder;
+  final MovieItemViewModelProtocol viewModel;
 
-  const MovieItemView({super.key, required this.viewHolder});
+  const MovieItemView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MovieItemView extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: Image.network(
-                '${Constants.imageBaseURL}${viewHolder.posterPath}',
+                '${Constants.imageBaseURL}${viewModel.posterPath}',
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,7 +33,7 @@ class MovieItemView extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          viewHolder.title,
+          viewModel.title,
           style: AppFonts.nunitoSemiBold(16, AppColors.white),
           maxLines: 2,
           textAlign: TextAlign.start,

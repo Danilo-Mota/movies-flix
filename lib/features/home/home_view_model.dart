@@ -1,7 +1,7 @@
 import '../../model/movies.dart';
 import '../../model/movies_result.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
-import '../../support/components/movies_item/movie_item_view_holder.dart';
+import '../../support/components/movies_item/movie_item_view_model.dart';
 import 'home_view_controller.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
 
@@ -15,9 +15,9 @@ class HomeViewModel extends HomeViewControllerProtocol {
   HomeViewModel({required this.useCase});
 
   @override
-  List<MovieItemViewHolderProtocol> get popularMovies {
+  List<MovieItemViewModelProtocol> get popularMovies {
     return _movies.map((popularMovie) {
-      return MovieItemViewHolder(movie: popularMovie);
+      return MovieItemViewModel(movie: popularMovie);
     }).toList();
   }
 

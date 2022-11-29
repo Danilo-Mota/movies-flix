@@ -12,7 +12,7 @@ abstract class HomeViewModelProtocol extends ChangeNotifier {
   bool get hasError;
   bool get isLoading;
   String get errorMessage;
-  List<MovieItemViewHolderProtocol> get popularMovies;
+  List<MovieItemViewModelProtocol> get popularMovies;
 }
 
 class HomeView extends StatelessWidget {
@@ -52,7 +52,7 @@ class HomeView extends StatelessWidget {
       return Center(
         child: Text(
           viewModel.errorMessage,
-          style: AppFonts.montserratSemibold(14, AppColors.white),
+          style: AppFonts.montserratSemibold(16, AppColors.white),
         ),
       );
     }

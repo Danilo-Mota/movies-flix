@@ -6,7 +6,7 @@ import 'movie_item_view.dart';
 
 class MovieHorizontalList extends StatelessWidget {
   final String sectionTitle;
-  final List<MovieItemViewHolderProtocol> movies;
+  final List<MovieItemViewModelProtocol> movies;
 
   const MovieHorizontalList({
     super.key,
@@ -24,7 +24,7 @@ class MovieHorizontalList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 20, bottom: 30),
+            margin: const EdgeInsets.only(left: 20, bottom: 32),
             child: Text(
               sectionTitle,
               style: AppFonts.montserratSemibold(20, AppColors.white),
@@ -42,11 +42,11 @@ class MovieHorizontalList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
-                      maxWidth: 153.5,
+                      maxWidth: 154,
                     ),
                     child: SizedBox(
-                      width: width / 2.54,
-                      child: MovieItemView(viewHolder: movies[index]),
+                      width: width / 2.5,
+                      child: MovieItemView(viewModel: movies[index]),
                     ),
                   ),
                 );
