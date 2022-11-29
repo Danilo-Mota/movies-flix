@@ -1,8 +1,8 @@
 import '../../model/movies.dart';
 import '../../model/movies_result.dart';
-import 'home_view_controller.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/movies_item/movie_item_view_holder.dart';
+import 'home_view_controller.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewControllerProtocol {
@@ -26,8 +26,9 @@ class HomeViewModel extends HomeViewControllerProtocol {
     _showLoading(true);
 
     useCase.execute(
-        success: (results) => _handleGetPopularMoviesSuccess(results),
-        error: (errorMessage) => _handleGetPopularMoviesError(errorMessage));
+      success: (results) => _handleGetPopularMoviesSuccess(results),
+      error: (errorMessage) => _handleGetPopularMoviesError(errorMessage),
+    );
   }
 
   @override

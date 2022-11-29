@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../support/components/movies_item/movie_horizontal_list_view.dart';
+import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
-import '../../support/components/movies_item/movie_item_view.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
-  String get errorMessage;
-  bool get isLoading;
   bool get hasError;
+  bool get isLoading;
+  String get errorMessage;
   List<MovieItemViewHolderProtocol> get popularMovies;
 }
 
