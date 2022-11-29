@@ -13,8 +13,8 @@ class AppFonts {
   static TextStyle nunitoSemiBold(double size, Color color) {
     return GoogleFonts.nunito(
       color: color,
-       fontSize: size,
-        fontWeight: FontWeight.w600
+      fontSize: size,
+      fontWeight: FontWeight.w600,
     );
   }
 }
