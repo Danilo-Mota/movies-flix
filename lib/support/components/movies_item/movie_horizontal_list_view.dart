@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'movie_item_view.dart';
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
-import '../../utils/localize.dart';
+import 'movie_item_view.dart';
 
 class MovieHorizontalList extends StatelessWidget {
+  final String sectionTitle;
   final List<MovieItemViewHolderProtocol> movies;
 
-  const MovieHorizontalList({super.key, required this.movies});
+  const MovieHorizontalList({
+    super.key,
+    required this.movies,
+    required this.sectionTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = Localize.instance.l10n;
     final width = MediaQuery.of(context).size.width;
 
     return ConstrainedBox(
@@ -23,7 +26,7 @@ class MovieHorizontalList extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(left: 20, bottom: 30),
             child: Text(
-              l10n.popularMoviesLabel,
+              sectionTitle,
               style: AppFonts.montserratSemibold(20, AppColors.white),
               textAlign: TextAlign.start,
             ),

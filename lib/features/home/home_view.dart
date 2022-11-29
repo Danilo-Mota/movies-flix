@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../support/components/movies_item/movie_horizontal_list_view.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
+import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
   bool get hasError;
@@ -19,6 +22,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = Localize.instance.l10n;
+
     return AnimatedBuilder(
         animation: viewModel,
         builder: (_, __) {
@@ -28,7 +33,7 @@ class HomeView extends StatelessWidget {
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [const SizedBox(height: 28), _popularMovies()],
+                  children: [const SizedBox(height: 28), _popularMovies(l10n.popularMoviesLabel)],
                 ),
               ),
             ),
@@ -36,21 +41,24 @@ class HomeView extends StatelessWidget {
         });
   }
 
-  Widget _popularMovies() {
+  Widget _popularMovies(String sectionTitle) {
     if (viewModel.isLoading) {
       return const Center(
         child: CircularProgressIndicator(
           color: AppColors.white,
         ),
       );
-    } else if(viewModel.hasError) {
-        return Center(
+    } else if (viewModel.hasError) {
+      return Center(
         child: Text(
-         viewModel.errorMessage,
-         style: AppFonts.montserratSemibold(14, AppColors.white),
+          viewModel.errorMessage,
+          style: AppFonts.montserratSemibold(14, AppColors.white),
         ),
       );
     }
-    return MovieHorizontalList(movies: viewModel.popularMovies);
+    return MovieHorizontalList(
+      movies: viewModel.popularMovies,
+      sectionTitle: sectionTitle,
+    );
   }
 }
