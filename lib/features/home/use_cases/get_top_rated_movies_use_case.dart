@@ -4,21 +4,21 @@ import '../../../model/movies_result.dart';
 typedef Error = void Function(String error);
 typedef Success = void Function(MoviesResult popularMovies);
 
-abstract class GetPopularMoviesUseCaseProtocol {
+abstract class GetTopRatedMoviesUseCaseProtocol {
   void execute({required Success success, required Error error});
 }
 
-class GetPopularMoviesUseCase extends GetPopularMoviesUseCaseProtocol {
+class GetTopRatedMoviesUseCase extends GetTopRatedMoviesUseCaseProtocol {
   final MoviesRoutes routes;
 
-  GetPopularMoviesUseCase({required this.routes});
+  GetTopRatedMoviesUseCase({required this.routes});
 
   @override
   void execute({required Success success, required Error error}) {
-    routes.getPopularMovies(
+    routes.getTopRatedMovies(
       success: (results) {
-        final popularMovies = MoviesResult.fromMap(results);
-        success(popularMovies);
+        final topRatedMovies = MoviesResult.fromMap(results);
+        success(topRatedMovies);
       },
       failure: (dioError) {
         error(dioError.message);
