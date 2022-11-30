@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../style/app_colors.dart';
-import '../../style/app_fonts.dart';
-import 'movie_item_view.dart';
+import '../style/app_colors.dart';
+import '../style/app_fonts.dart';
+import 'movies_item/movie_item_view.dart';
 
 class MovieHorizontalList extends StatelessWidget {
   final String sectionTitle;
