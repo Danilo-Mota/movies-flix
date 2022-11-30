@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'home_view.dart';
 
-abstract class HomeViewControllerProtocol extends HomeViewModelProtocol {
+abstract class HomeViewProtocol extends HomeViewModelProtocol {
   void getPopularMovies();
 }
 
 class HomeViewController extends StatefulWidget {
-  final HomeViewControllerProtocol viewModel;
+  final HomeViewProtocol viewModel;
 
   const HomeViewController({super.key, required this.viewModel});
 
@@ -20,7 +20,6 @@ class _HomeViewController extends State<HomeViewController> {
   @override
   void initState() {
     widget.viewModel.getPopularMovies();
-    _bind();
     super.initState();
   }
 
@@ -28,6 +27,4 @@ class _HomeViewController extends State<HomeViewController> {
   Widget build(BuildContext context) {
     return HomeView(viewModel: widget.viewModel);
   }
-
-  void _bind() {}
 }
