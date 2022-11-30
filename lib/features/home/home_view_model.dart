@@ -37,7 +37,7 @@ class HomeViewModel extends HomeViewProtocol {
 
     useCase.execute(
       success: (results) => _handleGetPopularMoviesSuccess(results),
-      failure: (errorMessage) => _handleGetPopularMoviesError(errorMessage),
+      failure: (errorMessage) => _handleGetPopularMoviesError(errorMessage.description),
     );
   }
 
