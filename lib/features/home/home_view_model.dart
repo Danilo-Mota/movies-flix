@@ -6,28 +6,49 @@ import 'home_view_controller.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewProtocol {
-  bool _isLoading = true;
-  bool _hasError = false;
-  String _errorMessage = '';
-  List<Movies> _movies = [];
+  bool _popularMoviesIsLoading = true;
+  bool _popularMoviesHasError = false;
+  String _popularMoviesErrorMessage = '';
+  bool _topRatedMoviesIsLoading = true;
+  bool _topRatedMoviesHasError = false;
+  String _topRatedMoviesErrorMessage = '';
+  List<Movies> _popularMovies = [];
+  List<Movies> _topRatedMovies = [];
+
 
   final GetPopularMoviesUseCase useCase;
 
   HomeViewModel({required this.useCase});
 
   @override
-  String get errorMessage => _errorMessage;
+  String get popularMoviesErrorMessage => _popularMoviesErrorMessage;
 
   @override
-  bool get hasError => _hasError;
+  bool get popularMoviesHasError => _popularMoviesHasError;
 
   @override
-  bool get isLoading => _isLoading;
+  bool get popularMoviesIsLoading => _popularMoviesIsLoading;
+
+  @override
+  String get topRatedMoviesErrorMessage => _topRatedMoviesErrorMessage;
+  
+  @override
+  bool get topRatedMoviesHasError => _topRatedMoviesHasError;
+  
+  @override
+  bool get topRatedMoviesIsLoading => _topRatedMoviesIsLoading;
 
   @override
   List<MovieItemViewModelProtocol> get popularMovies {
-    return _movies.map((popularMovie) {
+    return _popularMovies.map((popularMovie) {
       return MovieItemViewModel(movie: popularMovie);
+    }).toList();
+  }
+
+  @override
+  List<MovieItemViewModelProtocol> get topRatedMovies {
+    return _topRatedMovies.map((topRatedMovie) {
+      return MovieItemViewModel(movie: topRatedMovie);
     }).toList();
   }
 
@@ -41,19 +62,24 @@ class HomeViewModel extends HomeViewProtocol {
     );
   }
 
+    @override
+  void getTopRatedMovies() {
+    
+  }
+
   void _handleGetPopularMoviesSuccess(MoviesResult results) {
-    _movies = results.moviesResult;
+    _popularMovies = results.moviesResult;
     _showLoading(false);
   }
 
   void _handleGetPopularMoviesError(String errorMessage) {
-    _errorMessage = errorMessage;
-    _hasError = true;
+    _popularMoviesErrorMessage = errorMessage;
+    _popularMoviesHasError = true;
     _showLoading(false);
   }
 
   void _showLoading(bool isLoading) {
-    _isLoading = isLoading;
+    _popularMoviesIsLoading = isLoading;
     notifyListeners();
   }
 }

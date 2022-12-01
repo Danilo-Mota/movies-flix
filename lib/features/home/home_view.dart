@@ -7,10 +7,14 @@ import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
-  bool get hasError;
-  bool get isLoading;
-  String get errorMessage;
+  bool get popularMoviesHasError;
+  bool get topRatedMoviesHasError;
+  bool get popularMoviesIsLoading;
+  bool get topRatedMoviesIsLoading;
+  String get popularMoviesErrorMessage;
+  String get topRatedMoviesErrorMessage;
   List<MovieItemViewModelProtocol> get popularMovies;
+  List<MovieItemViewModelProtocol> get topRatedMovies;
 }
 
 class HomeView extends StatelessWidget {
@@ -43,12 +47,12 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _popularMovies(String sectionTitle) {
-    if (viewModel.isLoading) {
+    if (viewModel.popularMoviesIsLoading) {
       return const LoadingPlaceholderView();
     }
 
-    if (viewModel.hasError) {
-      return ErrorPlaceholderView(errorMessage: viewModel.errorMessage);
+    if (viewModel.popularMoviesHasError) {
+      return ErrorPlaceholderView(errorMessage: viewModel.popularMoviesErrorMessage);
     }
 
     return MovieHorizontalList(
