@@ -5,22 +5,22 @@ import '../../../model/server_error.dart';
 typedef Failure = void Function(ServerError failure);
 typedef Success = void Function(MoviesResult popularMovies);
 
-abstract class GetTopRatedMoviesUseCaseProtocol {
+abstract class GetUpcomingMoviesUseCaseProtocol {
   void execute({required Success success, required Failure failure});
 }
 
-class GetTopRatedMoviesUseCase extends GetTopRatedMoviesUseCaseProtocol {
+class GetUpcomingMoviesUseCase extends GetUpcomingMoviesUseCaseProtocol {
   final MoviesRoutes routes;
 
-  GetTopRatedMoviesUseCase({required this.routes});
+  GetUpcomingMoviesUseCase({required this.routes});
 
   @override
   void execute({required Success success, required Failure failure}) {
-    routes.getTopRatedMovies(
+    routes.getUpcomingMovies(
       success: (results) {
         try {
-          final topRatedMovies = MoviesResult.fromMap(results);
-          success(topRatedMovies);
+          final upcomingMovies = MoviesResult.fromMap(results);
+          success(upcomingMovies);
         } on Error catch (error) {
           failure(error.internalError());
         }

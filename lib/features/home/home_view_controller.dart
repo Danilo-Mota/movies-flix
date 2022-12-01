@@ -5,6 +5,7 @@ import 'home_view.dart';
 abstract class HomeViewProtocol extends HomeViewModelProtocol {
   void getPopularMovies();
   void getTopRatedMovies();
+  void getUpcomingMovies();
 }
 
 class HomeViewController extends StatefulWidget {
@@ -31,5 +32,6 @@ class _HomeViewController extends State<HomeViewController> {
   void _getMovies() {
     widget.viewModel.getPopularMovies();
     widget.viewModel.getTopRatedMovies();
+    widget.viewModel.getUpcomingMovies();
   }
 }

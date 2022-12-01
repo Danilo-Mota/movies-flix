@@ -4,17 +4,24 @@ import '../../support/components/movie_horizontal_list_view.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
+import '../../support/components/section_title_view.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
   bool get popularMoviesHasError;
-  bool get topRatedMoviesHasError;
   bool get popularMoviesIsLoading;
-  bool get topRatedMoviesIsLoading;
   String get popularMoviesErrorMessage;
-  String get topRatedMoviesErrorMessage;
   List<MovieItemViewModelProtocol> get popularMovies;
+
+  bool get topRatedMoviesHasError;
+  bool get topRatedMoviesIsLoading;
+  String get topRatedMoviesErrorMessage;
   List<MovieItemViewModelProtocol> get topRatedMovies;
+
+  bool get upcomingMoviesHasError;
+  bool get upcomingMoviesIsLoading;
+  String get upcomingMoviesErrorMessage;
+  List<MovieItemViewModelProtocol> get upcomingMovies;
 }
 
 class HomeView extends StatelessWidget {
@@ -37,7 +44,14 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 28),
-                  _popularMovies(l10n.popularMoviesLabel),
+                  SectionTitleView(title: l10n.topRatedMoviesLabel),
+                  _topRatedMovies(),
+                  const SizedBox(height: 28),
+                  SectionTitleView(title: l10n.popularMoviesLabel),
+                  _popularMovies(),
+                  const SizedBox(height: 28),
+                  SectionTitleView(title: l10n.upcomingMoviesLabel),
+                  _upcomingMovies(),
                 ],
               );
             },
@@ -47,16 +61,30 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _popularMovies(String sectionTitle) {
+  Widget _popularMovies() {
     if (viewModel.popularMoviesIsLoading) return const LoadingPlaceholderView();
-
     if (viewModel.popularMoviesHasError) {
       return ErrorPlaceholderView(errorMessage: viewModel.popularMoviesErrorMessage);
     }
 
-    return MovieHorizontalList(
-      movies: viewModel.popularMovies,
-      sectionTitle: sectionTitle,
-    );
+    return MovieHorizontalList(movies: viewModel.popularMovies);
+  }
+
+  Widget _topRatedMovies() {
+    if (viewModel.topRatedMoviesIsLoading) return const LoadingPlaceholderView();
+    if (viewModel.topRatedMoviesHasError) {
+      return ErrorPlaceholderView(errorMessage: viewModel.topRatedMoviesErrorMessage);
+    }
+
+    return MovieHorizontalList(movies: viewModel.topRatedMovies);
+  }
+
+  Widget _upcomingMovies() {
+    if (viewModel.upcomingMoviesIsLoading) return const LoadingPlaceholderView();
+    if (viewModel.upcomingMoviesHasError) {
+      return ErrorPlaceholderView(errorMessage: viewModel.upcomingMoviesErrorMessage);
+    }
+
+    return MovieHorizontalList(movies: viewModel.upcomingMovies);
   }
 }
