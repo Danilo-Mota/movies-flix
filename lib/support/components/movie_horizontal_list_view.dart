@@ -39,11 +39,11 @@ class MovieHorizontalList extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (_, index) {
                   return SizedBox(
-                    width: width * 0.4,
+                    width: width * 0.45,
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       child:  MovieItemView(viewModel: movies[index]),
-                      )
+                      ),
                   );
                 },
               ),

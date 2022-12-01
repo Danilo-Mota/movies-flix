@@ -36,20 +36,16 @@ class HomeViewModel extends HomeViewProtocol {
     _showLoading(true);
 
     useCase.execute(
-      success: (results) => _handleGetPopularMoviesSuccess(results),
-      failure: (errorMessage) => _handleGetPopularMoviesError(errorMessage.description),
+      success: (results) {
+        _movies = results.moviesResult;
+        _showLoading(false);
+      },
+      failure: (errorMessage) {
+        _errorMessage = errorMessage.description;
+        _hasError = true;
+        _showLoading(false);
+      },
     );
-  }
-
-  void _handleGetPopularMoviesSuccess(MoviesResult results) {
-    _movies = results.moviesResult;
-    _showLoading(false);
-  }
-
-  void _handleGetPopularMoviesError(String errorMessage) {
-    _errorMessage = errorMessage;
-    _hasError = true;
-    _showLoading(false);
   }
 
   void _showLoading(bool isLoading) {

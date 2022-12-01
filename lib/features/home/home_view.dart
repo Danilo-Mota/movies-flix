@@ -23,29 +23,28 @@ class HomeView extends StatelessWidget {
     final l10n = Localize.instance.l10n;
 
     return Scaffold(
-        body: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: SafeArea(
-        child: AnimatedBuilder(
-          animation: viewModel,
-          builder: (_, __) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 28),
-                _popularMovies(l10n.popularMoviesLabel),
-              ],
-            );
-          },
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: SafeArea(
+          child: AnimatedBuilder(
+            animation: viewModel,
+            builder: (_, __) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 28),
+                  _popularMovies(l10n.popularMoviesLabel),
+                ],
+              );
+            },
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _popularMovies(String sectionTitle) {
-    if (viewModel.isLoading) {
-      return const LoadingPlaceholderView();
-    }
+    if (viewModel.isLoading) return const LoadingPlaceholderView();
 
     if (viewModel.hasError) {
       return ErrorPlaceholderView(errorMessage: viewModel.errorMessage);
