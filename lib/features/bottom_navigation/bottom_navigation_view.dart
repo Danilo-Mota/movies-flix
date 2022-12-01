@@ -16,7 +16,7 @@ class BottomNavigationView extends StatelessWidget {
   final BottomNavigationViewModelProtocol viewModel;
   final StatefulWidget homeView = HomeFactory.home();
 
-  BottomNavigationView({Key? key, required this.viewModel}) : super(key: key);
+  BottomNavigationView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {

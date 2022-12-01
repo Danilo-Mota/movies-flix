@@ -34,7 +34,7 @@ class MovieItemView extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           viewModel.title,
-          style: AppFonts.nunitoSemiBold(16, AppColors.white),
+          style: AppFonts.nunitoSemiBold(12, AppColors.white),
           maxLines: 2,
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,

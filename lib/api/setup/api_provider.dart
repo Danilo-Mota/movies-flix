@@ -15,7 +15,7 @@ class ApiProvider {
   Future<void> request({required Endpoint endpoint, Success? success, Failure? failure}) async {
     _dio.options.method = endpoint.method;
     _dio.options.baseUrl = ApiHost.baseURL;
-    _dio.options.queryParameters = endpoint.queryParameters ?? {};
+    _dio.options.queryParameters = endpoint.queryParameters;
     _dio.options.contentType = endpoint.contentType ?? ContentType.json.value;
 
     try {

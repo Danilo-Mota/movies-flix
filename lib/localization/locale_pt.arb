@@ -5,5 +5,11 @@
   "homeTitle" : "Home",
   "searchTitle" : "Buscar",
   "profileTitle" : "Perfil",
-  "popularMoviesLabel" : "Filmes populares"
+
+  "popularMoviesLabel" : "Filmes populares",
+  
+  "requestError": "Aconteceu um erro inesperado com os nossos servidores.",
+  "timeoutError": "O tempo de requisição esgotou, tente novamente mais tarde.",
+  "mappingFailureError": "Ocorreu um erro na requisição. Estamos trabalhando nisso!",
+  "multipleAccountsLoggedError": "Parece que esta conta está sendo utilizada em outro dispositivo. Faça login novamente."
 }
