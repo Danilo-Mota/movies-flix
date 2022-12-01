@@ -11,4 +11,7 @@ class MovieItemViewModel extends MovieItemViewModelProtocol {
 
   @override
   String get title => movie.title;
+  
+  @override
+  num get rating => movie.rating;
 }

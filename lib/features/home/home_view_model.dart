@@ -1,9 +1,9 @@
 import '../../model/movies.dart';
-import '../../model/movies_result.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/movies_item/movie_item_view_model.dart';
 import 'home_view_controller.dart';
 import 'use_cases/get_popular_movies_use_case.dart';
+import 'use_cases/get_top_rated_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewProtocol {
   bool _popularMoviesIsLoading = true;
@@ -15,10 +15,13 @@ class HomeViewModel extends HomeViewProtocol {
   List<Movies> _popularMovies = [];
   List<Movies> _topRatedMovies = [];
 
+  final GetPopularMoviesUseCase popularMovieUseCase;
+  final GetTopRatedMoviesUseCase topRatedMovieUseCase;
 
-  final GetPopularMoviesUseCase useCase;
-
-  HomeViewModel({required this.useCase});
+  HomeViewModel({
+    required this.topRatedMovieUseCase,
+    required this.popularMovieUseCase,
+  });
 
   @override
   String get popularMoviesErrorMessage => _popularMoviesErrorMessage;
@@ -31,10 +34,10 @@ class HomeViewModel extends HomeViewProtocol {
 
   @override
   String get topRatedMoviesErrorMessage => _topRatedMoviesErrorMessage;
-  
+
   @override
   bool get topRatedMoviesHasError => _topRatedMoviesHasError;
-  
+
   @override
   bool get topRatedMoviesIsLoading => _topRatedMoviesIsLoading;
 
@@ -56,27 +59,21 @@ class HomeViewModel extends HomeViewProtocol {
   void getPopularMovies() {
     _showLoading(true);
 
-    useCase.execute(
-      success: (results) => _handleGetPopularMoviesSuccess(results),
-      failure: (errorMessage) => _handleGetPopularMoviesError(errorMessage.description),
+    popularMovieUseCase.execute(
+      success: (results) {
+        _popularMovies = results.moviesResult;
+        _showLoading(false);
+      },
+      failure: (errorMessage) {
+        _popularMoviesErrorMessage = errorMessage.description;
+        _popularMoviesHasError = true;
+        _showLoading(false);
+      },
     );
   }
 
-    @override
-  void getTopRatedMovies() {
-    
-  }
-
-  void _handleGetPopularMoviesSuccess(MoviesResult results) {
-    _popularMovies = results.moviesResult;
-    _showLoading(false);
-  }
-
-  void _handleGetPopularMoviesError(String errorMessage) {
-    _popularMoviesErrorMessage = errorMessage;
-    _popularMoviesHasError = true;
-    _showLoading(false);
-  }
+  @override
+  void getTopRatedMovies() {}
 
   void _showLoading(bool isLoading) {
     _popularMoviesIsLoading = isLoading;
