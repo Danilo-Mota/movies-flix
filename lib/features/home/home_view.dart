@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../support/components/movie_horizontal_list_view.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/components/section_title_view.dart';
+import '../../support/style/app_colors.dart';
+import '../../support/utils/constants.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
@@ -35,7 +38,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        padding: const EdgeInsets.only(bottom: 8.0),
         child: SafeArea(
           child: AnimatedBuilder(
             animation: viewModel,
@@ -43,13 +46,14 @@ class HomeView extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 28),
+                  _topMoviesSlider(context),
+                  const SizedBox(height: 16),
                   SectionTitleView(title: l10n.topRatedMoviesLabel),
                   _topRatedMovies(),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 16),
                   SectionTitleView(title: l10n.popularMoviesLabel),
                   _popularMovies(),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 16),
                   SectionTitleView(title: l10n.upcomingMoviesLabel),
                   _upcomingMovies(),
                 ],
@@ -58,6 +62,40 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _topMoviesSlider(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: height * 0.55,
+        viewportFraction: 1.0,
+        autoPlay: true,
+      ),
+      items: viewModel.popularMovies.map(
+        (viewModel) {
+          return Container(
+            foregroundDecoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.transparent, AppColors.black],
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                stops: [0, 1],
+              ),
+            ),
+            child: Center(
+              child: Image.network(
+                '${Constants.imageBaseURL}${viewModel.posterPath}',
+                fit: BoxFit.fill,
+                width: width,
+              ),
+            ),
+          );
+        },
+      ).toList(),
     );
   }
 

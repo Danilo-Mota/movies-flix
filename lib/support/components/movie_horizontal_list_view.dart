@@ -13,7 +13,7 @@ class MovieHorizontalList extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return SizedBox(
-      height: height * 0.4,
+      height: height * 0.3,
       child: Flexible(
         child: ListView.builder(
           itemCount: movies.length,
@@ -21,7 +21,7 @@ class MovieHorizontalList extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           itemBuilder: (_, index) {
             return SizedBox(
-              width: width * 0.45,
+              width: width * 0.4,
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: MovieItemView(viewModel: movies[index]),
