@@ -79,7 +79,7 @@ class HomeViewModel extends HomeViewProtocol {
   @override
   List<MovieItemViewModelProtocol> get upcomingMovies {
     return _upcomingMovies.map((upcomingMovie) {
-      return MovieItemViewModel(movie: upcomingMovie);
+      return MovieItemViewModel(movie: upcomingMovie, showRating: false);
     }).toList();
   }
 

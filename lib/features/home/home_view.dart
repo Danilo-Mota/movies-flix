@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
 import '../../support/components/movie_horizontal_list_view.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/components/section_title_view.dart';
-import '../../support/style/app_colors.dart';
-import '../../support/utils/constants.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
@@ -46,7 +44,7 @@ class HomeView extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _topMoviesSlider(context),
+                  _carouselMovies(context),
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.topRatedMoviesLabel),
                   _topRatedMovies(),
@@ -65,9 +63,13 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _topMoviesSlider(BuildContext context) {
+  Widget _carouselMovies(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+
+    if (viewModel.popularMoviesIsLoading) return const LoadingPlaceholderView();
+    if (viewModel.popularMoviesHasError) {
+      return ErrorPlaceholderView(errorMessage: viewModel.popularMoviesErrorMessage);
+    }
 
     return CarouselSlider(
       options: CarouselOptions(
@@ -76,23 +78,10 @@ class HomeView extends StatelessWidget {
         autoPlay: true,
       ),
       items: viewModel.popularMovies.map(
-        (viewModel) {
-          return Container(
-            foregroundDecoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.transparent, AppColors.black],
-                begin: Alignment.center,
-                end: Alignment.bottomCenter,
-                stops: [0, 1],
-              ),
-            ),
-            child: Center(
-              child: Image.network(
-                '${Constants.imageBaseURL}${viewModel.posterPath}',
-                fit: BoxFit.fill,
-                width: width,
-              ),
-            ),
+        (carouselMovies) {
+          return MovieItemView(
+            viewModel: carouselMovies,
+            itemTypeIsCarousel: true,
           );
         },
       ).toList(),

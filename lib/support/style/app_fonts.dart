@@ -17,4 +17,12 @@ class AppFonts {
       fontWeight: FontWeight.w600,
     );
   }
+
+    static TextStyle nunitoBold(double size, Color color) {
+    return GoogleFonts.nunito(
+      color: color,
+      fontSize: size,
+      fontWeight: FontWeight.w700,
+    );
+  }
 }

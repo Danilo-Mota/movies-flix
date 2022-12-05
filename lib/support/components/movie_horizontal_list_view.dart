@@ -14,21 +14,22 @@ class MovieHorizontalList extends StatelessWidget {
 
     return SizedBox(
       height: height * 0.3,
-      child: Flexible(
-        child: ListView.builder(
-          itemCount: movies.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (_, index) {
-            return SizedBox(
-              width: width * 0.4,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
-                child: MovieItemView(viewModel: movies[index]),
+      child: ListView.builder(
+        itemCount: movies.length,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (_, index) {
+          return SizedBox(
+            width: width * 0.4,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              child: MovieItemView(
+                viewModel: movies[index],
+                itemTypeIsCarousel: false,
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
