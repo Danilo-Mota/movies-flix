@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,9 @@ import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/components/section_title_view.dart';
+import '../../support/style/app_colors.dart';
+import '../../support/style/app_fonts.dart';
+import '../../support/utils/constants.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
@@ -48,10 +52,13 @@ class HomeView extends StatelessWidget {
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.topRatedMoviesLabel),
                   _topRatedMovies(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
+                  SectionTitleView(title: 'Sugestões para você'),
+                  _suggestedMovies(),
+                  const SizedBox(height: 32),
                   SectionTitleView(title: l10n.popularMoviesLabel),
                   _popularMovies(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   SectionTitleView(title: l10n.upcomingMoviesLabel),
                   _upcomingMovies(),
                 ],
@@ -113,5 +120,38 @@ class HomeView extends StatelessWidget {
     }
 
     return MovieHorizontalList(movies: viewModel.upcomingMovies);
+  }
+
+  Widget _suggestedMovies() {
+    if (viewModel.upcomingMoviesIsLoading) return const LoadingPlaceholderView();
+    if (viewModel.upcomingMoviesHasError) {
+      return ErrorPlaceholderView(errorMessage: viewModel.upcomingMoviesErrorMessage);
+    }
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        autoPlay: true,
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
+      ),
+      items: viewModel.upcomingMovies.map(
+        (upcomingMoviesSlider) {
+          return Stack(
+            children: [
+              Container(decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(6))),
+              Positioned(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image(
+                    image: CachedNetworkImageProvider('${Constants.imageBaseURL}${upcomingMoviesSlider.posterPath}'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ); // child:
+        },
+      ).toList(),
+    );
   }
 }
