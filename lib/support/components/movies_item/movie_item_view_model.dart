@@ -20,5 +20,5 @@ class MovieItemViewModel extends MovieItemViewModelProtocol {
   }
 
   @override
-  bool get ratingIsVisible => showRating;
+  bool get isRatingVisible => showRating;
 }

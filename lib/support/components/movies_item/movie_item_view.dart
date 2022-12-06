@@ -9,7 +9,7 @@ abstract class MovieItemViewModelProtocol {
   String get title;
   String get rating;
   String get posterPath;
-  bool get ratingIsVisible;
+  bool get isRatingVisible;
 }
 
 class MovieItemView extends StatelessWidget {
@@ -45,7 +45,7 @@ class MovieItemView extends StatelessWidget {
                 left: 12,
                 bottom: 12,
                 child: Visibility(
-                  visible: viewModel.ratingIsVisible,
+                  visible: viewModel.isRatingVisible,
                   child: Container(
                     width: 80,
                     height: 28,

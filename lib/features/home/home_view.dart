@@ -35,6 +35,7 @@ class HomeView extends StatelessWidget {
     final l10n = Localize.instance.l10n;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: SafeArea(
@@ -48,12 +49,12 @@ class HomeView extends StatelessWidget {
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.topRatedMoviesLabel),
                   _topRatedMoviesWidget(),
-                  const SizedBox(height: 16),
+                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.popularMoviesLabel),
-                  _popularMoviesWidget(),
+                   _popularMoviesWidget(),
                   const SizedBox(height: 16),
-                  SectionTitleView(title: l10n.upcomingMoviesLabel),
-                  _upcomingMoviesWidget(),
+                   SectionTitleView(title: l10n.upcomingMoviesLabel),
+                   _upcomingMoviesWidget(),
                 ],
               );
             },
@@ -73,7 +74,8 @@ class HomeView extends StatelessWidget {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: height * 0.55,
+        //height: height * 0.55,
+        aspectRatio: 0.68,
         viewportFraction: 1.0,
         autoPlay: true,
       ),
