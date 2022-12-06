@@ -44,16 +44,16 @@ class HomeView extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _carouselMovies(context),
+                  _carouselMoviesWidget(context),
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.topRatedMoviesLabel),
-                  _topRatedMovies(),
+                  _topRatedMoviesWidget(),
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.popularMoviesLabel),
-                  _popularMovies(),
+                  _popularMoviesWidget(),
                   const SizedBox(height: 16),
                   SectionTitleView(title: l10n.upcomingMoviesLabel),
-                  _upcomingMovies(),
+                  _upcomingMoviesWidget(),
                 ],
               );
             },
@@ -63,7 +63,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _carouselMovies(BuildContext context) {
+  Widget _carouselMoviesWidget(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
 
     if (viewModel.popularMoviesIsLoading) return const LoadingPlaceholderView();
@@ -88,7 +88,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _popularMovies() {
+  Widget _popularMoviesWidget() {
     if (viewModel.popularMoviesIsLoading) return const LoadingPlaceholderView();
     if (viewModel.popularMoviesHasError) {
       return ErrorPlaceholderView(errorMessage: viewModel.popularMoviesErrorMessage);
@@ -97,7 +97,7 @@ class HomeView extends StatelessWidget {
     return MovieHorizontalList(movies: viewModel.popularMovies);
   }
 
-  Widget _topRatedMovies() {
+  Widget _topRatedMoviesWidget() {
     if (viewModel.topRatedMoviesIsLoading) return const LoadingPlaceholderView();
     if (viewModel.topRatedMoviesHasError) {
       return ErrorPlaceholderView(errorMessage: viewModel.topRatedMoviesErrorMessage);
@@ -106,7 +106,7 @@ class HomeView extends StatelessWidget {
     return MovieHorizontalList(movies: viewModel.topRatedMovies);
   }
 
-  Widget _upcomingMovies() {
+  Widget _upcomingMoviesWidget() {
     if (viewModel.upcomingMoviesIsLoading) return const LoadingPlaceholderView();
     if (viewModel.upcomingMoviesHasError) {
       return ErrorPlaceholderView(errorMessage: viewModel.upcomingMoviesErrorMessage);

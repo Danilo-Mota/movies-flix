@@ -7,7 +7,7 @@ import 'use_cases/get_top_rated_movies_use_case.dart';
 import 'use_cases/get_upcoming_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewProtocol {
-  //Private variables
+
   List<Movies> _popularMovies = [];
   bool _popularMoviesIsLoading = true;
   bool _popularMoviesHasError = false;
@@ -23,7 +23,6 @@ class HomeViewModel extends HomeViewProtocol {
   bool _upcomingMoviesHasError = false;
   String _upcomingMoviesErrorMessage = '';
 
-  //Final variables
   final GetPopularMoviesUseCase popularMovieUseCase;
   final GetTopRatedMoviesUseCase topRatedMovieUseCase;
   final GetUpcomingMoviesUseCase upcomingMovieUseCase;
@@ -34,7 +33,6 @@ class HomeViewModel extends HomeViewProtocol {
     required this.upcomingMovieUseCase,
   });
 
-  //Protocol methods
   @override
   String get popularMoviesErrorMessage => _popularMoviesErrorMessage;
 
@@ -83,7 +81,6 @@ class HomeViewModel extends HomeViewProtocol {
     }).toList();
   }
 
-  //Requests
   @override
   void getPopularMovies() {
     _setPopularMoviesLoading(true);
@@ -135,7 +132,6 @@ class HomeViewModel extends HomeViewProtocol {
     );
   }
 
-  //Loadings
   void _setPopularMoviesLoading(bool isLoading) {
     _popularMoviesIsLoading = isLoading;
     notifyListeners();
