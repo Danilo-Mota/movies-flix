@@ -10,6 +10,7 @@
   "upcomingMoviesLabel" : "O que vem por aí",
   "topRatedMoviesLabel" : "Aclamados pela crítica",
   "learnMoreLabel" : "Saiba mais",
+  "suggestionsForYouLabel" : "Sugestões para você",
   
   "requestError": "Aconteceu um erro inesperado com os nossos servidores.",
   "timeoutError": "O tempo de requisição esgotou, tente novamente mais tarde.",

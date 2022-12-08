@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
+import '../../utils/constants.dart';
 import '../../utils/localize.dart';
 
 abstract class MovieItemViewModelProtocol {
@@ -14,17 +15,25 @@ abstract class MovieItemViewModelProtocol {
 
 class MovieItemView extends StatelessWidget {
   final MovieItemViewModelProtocol viewModel;
-  final bool itemTypeIsCarousel;
+  final String itemType;
 
-  const MovieItemView({super.key, required this.viewModel, required this.itemTypeIsCarousel});
+  const MovieItemView({super.key, required this.viewModel, required this.itemType});
 
   @override
   Widget build(BuildContext context) {
-    if (itemTypeIsCarousel) return _carouselMovieItem(context);
-    return _movieItem();
+    switch (itemType) {
+      case Constants.movieItemType:
+        return _movieItemWidget();
+      case Constants.carouselMovieItemType:
+        return _carouselMovieItemWidget(context);
+      case Constants.suggestedMovieItemType:
+        return _suggestedMovieItemWidget();
+      default:
+        return _movieItemWidget();
+    }
   }
 
-  Widget _movieItem() {
+  Widget _movieItemWidget() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +85,7 @@ class MovieItemView extends StatelessWidget {
     );
   }
 
-  Widget _carouselMovieItem(BuildContext context) {
+  Widget _carouselMovieItemWidget(BuildContext context) {
     final l10n = Localize.instance.l10n;
     final width = MediaQuery.of(context).size.width;
 
@@ -132,6 +141,23 @@ class MovieItemView extends StatelessWidget {
             child: Text(
               l10n.learnMoreLabel,
               style: AppFonts.nunitoBold(16, AppColors.black),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _suggestedMovieItemWidget() {
+    return Stack(
+      children: [
+        Container(decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(6))),
+        Positioned(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: Image(
+              image: CachedNetworkImageProvider(viewModel.posterPath),
+              fit: BoxFit.cover,
             ),
           ),
         ),
