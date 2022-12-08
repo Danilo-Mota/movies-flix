@@ -11,10 +11,10 @@ class HomeFactory {
   static const String route = '/home';
 
   static StatefulWidget home() {
-    final router = MoviesRoutes();
-    final popularMovieUseCase = GetPopularMoviesUseCase(routes: router);
-    final topRatedMovieUseCase = GetTopRatedMoviesUseCase(routes: router);
-    final upcomingMovieUseCase = GetUpcomingMoviesUseCase(routes: router);
+    final routes = MoviesRoutes();
+    final popularMovieUseCase = GetPopularMoviesUseCase(routes: routes);
+    final topRatedMovieUseCase = GetTopRatedMoviesUseCase(routes: routes);
+    final upcomingMovieUseCase = GetUpcomingMoviesUseCase(routes: routes);
     final viewModel = HomeViewModel(
       popularMovieUseCase: popularMovieUseCase,
       topRatedMovieUseCase: topRatedMovieUseCase,

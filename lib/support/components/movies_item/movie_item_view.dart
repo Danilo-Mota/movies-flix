@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
-import '../../utils/constants.dart';
 import '../../utils/localize.dart';
 
 abstract class MovieItemViewModelProtocol {
-  num get rating;
   String get title;
+  String get rating;
   String get posterPath;
-  bool get ratingIsVisible;
+  bool get isRatingVisible;
 }
 
 class MovieItemView extends StatelessWidget {
@@ -37,7 +36,7 @@ class MovieItemView extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: Image(
-                    image: CachedNetworkImageProvider('${Constants.imageBaseURL}${viewModel.posterPath}'),
+                    image: CachedNetworkImageProvider(viewModel.posterPath),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +45,7 @@ class MovieItemView extends StatelessWidget {
                 left: 12,
                 bottom: 12,
                 child: Visibility(
-                  visible: viewModel.ratingIsVisible,
+                  visible: viewModel.isRatingVisible,
                   child: Container(
                     width: 80,
                     height: 28,
@@ -56,7 +55,7 @@ class MovieItemView extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      '${Constants.theMoviesDatabaseAbbreviation} ${viewModel.rating}',
+                      viewModel.rating,
                       style: AppFonts.nunitoBold(12, AppColors.white),
                     ),
                   ),
@@ -95,7 +94,7 @@ class MovieItemView extends StatelessWidget {
             ),
             child: Center(
               child: Image.network(
-                '${Constants.imageBaseURL}${viewModel.posterPath}',
+                viewModel.posterPath,
                 fit: BoxFit.fill,
                 width: width,
               ),
@@ -114,7 +113,7 @@ class MovieItemView extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Text(
-              '${Constants.theMoviesDatabaseAbbreviation} ${viewModel.rating}',
+              viewModel.rating,
               style: AppFonts.nunitoBold(16, AppColors.white),
             ),
           ),
