@@ -10,6 +10,7 @@ abstract class MovieItemViewModelProtocol {
   String get title;
   String get rating;
   String get posterPath;
+  String get releaseDate;
   bool get isRatingVisible;
 }
 
@@ -149,16 +150,52 @@ class MovieItemView extends StatelessWidget {
   }
 
   Widget _suggestedMovieItemWidget() {
-    return Stack(
+    return Row(
       children: [
-        Container(decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(6))),
-        Positioned(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image(
-              image: CachedNetworkImageProvider(viewModel.posterPath),
-              fit: BoxFit.cover,
-            ),
+        ClipRRect(
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+          child: Image(
+            image: CachedNetworkImageProvider(viewModel.posterPath),
+            fit: BoxFit.cover,
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, right: 8, left: 8),
+                    child: Text(
+                      viewModel.title,
+                      style: AppFonts.nunitoBold(14, AppColors.black),
+                      maxLines: 2,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                    child: Text(
+                      viewModel.releaseDate,
+                      style: AppFonts.nunitoRegular(12, AppColors.black),
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
