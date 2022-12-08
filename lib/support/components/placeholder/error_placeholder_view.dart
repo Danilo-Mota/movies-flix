@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
+import '../../style/app_image.dart';
 
 class ErrorPlaceholderView extends StatelessWidget {
   final String errorMessage;
@@ -10,11 +14,27 @@ class ErrorPlaceholderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        errorMessage,
-        style: AppFonts.montserratSemibold(16, AppColors.white),
-      ),
+    final width = MediaQuery.of(context).size.width;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: Image.asset(
+            AppImage.icErrorPath,
+            width: width * 0.15,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Center(
+          child: Text(
+            errorMessage,
+            textAlign: TextAlign.center,
+            style: AppFonts.nunitoSemiBold(16, AppColors.white),
+          ),
+        )
+      ],
     );
   }
 }
