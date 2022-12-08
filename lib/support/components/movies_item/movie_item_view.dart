@@ -9,6 +9,7 @@ import '../../utils/localize.dart';
 abstract class MovieItemViewModelProtocol {
   String get title;
   String get rating;
+  String get voteCount;
   String get posterPath;
   String get releaseDate;
   bool get isRatingVisible;
@@ -191,6 +192,32 @@ class MovieItemView extends StatelessWidget {
                       maxLines: 1,
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                    child: Text(
+                      viewModel.voteCount,
+                      style: AppFonts.nunitoRegular(12, AppColors.black),
+                      maxLines: 1,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 28, right: 8, left: 8),
+                    child: Container(
+                      width: 80,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: AppColors.darkGreen,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        viewModel.rating,
+                        style: AppFonts.nunitoBold(12, AppColors.white),
+                      ),
                     ),
                   ),
                 ],

@@ -21,7 +21,10 @@ class MovieItemViewModel extends MovieItemViewModelProtocol {
 
   @override
   bool get isRatingVisible => showRating;
-  
+
   @override
   String get releaseDate => movie.releaseDate;
+
+  @override
+  String get voteCount => 'Votos: ${movie.voteCount}';
 }
