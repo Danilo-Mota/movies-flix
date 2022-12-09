@@ -11,6 +11,7 @@ abstract class MovieItemViewModelProtocol {
   String get rating;
   String get voteCount;
   String get posterPath;
+  String get popularity;
   String get releaseDate;
   bool get isRatingVisible;
 }
@@ -57,19 +58,7 @@ class MovieItemView extends StatelessWidget {
                 bottom: 12,
                 child: Visibility(
                   visible: viewModel.isRatingVisible,
-                  child: Container(
-                    width: 80,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      color: AppColors.darkGreen,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      viewModel.rating,
-                      style: AppFonts.nunitoBold(12, AppColors.white),
-                    ),
-                  ),
+                  child: _movieRatingWidget(viewModel.rating),
                 ),
               )
             ],
@@ -175,7 +164,7 @@ class MovieItemView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 24, right: 8, left: 8),
+                    padding: const EdgeInsets.only(top: 20, right: 8, left: 8),
                     child: Text(
                       viewModel.title,
                       style: AppFonts.nunitoBold(14, AppColors.black),
@@ -185,47 +174,49 @@ class MovieItemView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
-                    child: Text(
-                      viewModel.releaseDate,
-                      style: AppFonts.nunitoRegular(12, AppColors.black),
-                      maxLines: 1,
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                      child: _suggestedMovieDetailsText(viewModel.releaseDate)),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
-                    child: Text(
-                      viewModel.voteCount,
-                      style: AppFonts.nunitoRegular(12, AppColors.black),
-                      maxLines: 1,
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                      child: _suggestedMovieDetailsText(viewModel.voteCount)),
                   Padding(
-                    padding: const EdgeInsets.only(top: 28, right: 8, left: 8),
-                    child: Container(
-                      width: 80,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        viewModel.rating,
-                        style: AppFonts.nunitoBold(12, AppColors.white),
-                      ),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(right: 8, left: 8),
+                      child: _suggestedMovieDetailsText(viewModel.popularity)),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 12, right: 8, left: 8),
+                      child: _movieRatingWidget(viewModel.rating)),
                 ],
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Text _suggestedMovieDetailsText(String data) {
+    return Text(
+      data,
+      style: AppFonts.nunitoRegular(12, AppColors.black),
+      maxLines: 1,
+      textAlign: TextAlign.start,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Widget _movieRatingWidget(String rating) {
+    return Container(
+      width: 80,
+      height: 28,
+      decoration: BoxDecoration(
+        color: AppColors.darkGreen,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        rating,
+        style: AppFonts.nunitoBold(12, AppColors.white),
+      ),
     );
   }
 }

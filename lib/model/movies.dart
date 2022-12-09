@@ -3,6 +3,7 @@ class Movies {
   final num rating;
   final String title;
   final int voteCount;
+  final num popularity;
   final String posterPath;
   final String releaseDate;
 
@@ -11,6 +12,7 @@ class Movies {
         title = map['title'],
         rating = map['vote_average'],
         voteCount = map['vote_count'],
+        popularity = map['popularity'],
         posterPath = map['poster_path'],
         releaseDate = map['release_date'];
 }
