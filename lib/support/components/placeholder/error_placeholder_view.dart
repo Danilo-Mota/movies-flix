@@ -14,8 +14,6 @@ class ErrorPlaceholderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -24,7 +22,7 @@ class ErrorPlaceholderView extends StatelessWidget {
           Center(
             child: Image.asset(
               AppImage.icErrorPath,
-              width: width * 0.15,
+              width: 50,
             ),
           ),
           const SizedBox(height: 8),

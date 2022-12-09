@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../enums/movie_item_type.dart';
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
 import '../../utils/constants.dart';
@@ -18,18 +19,18 @@ abstract class MovieItemViewModelProtocol {
 
 class MovieItemView extends StatelessWidget {
   final MovieItemViewModelProtocol viewModel;
-  final String itemType;
+  final Enum itemType;
 
   const MovieItemView({super.key, required this.viewModel, required this.itemType});
 
   @override
   Widget build(BuildContext context) {
     switch (itemType) {
-      case Constants.movieItemType:
+      case MovieItemType.movieItem:
         return _movieItemWidget();
-      case Constants.carouselMovieItemType:
+      case MovieItemType.carouselItem:
         return _carouselMovieItemWidget(context);
-      case Constants.suggestedMovieItemType:
+      case MovieItemType.suggestedItem:
         return _suggestedMovieItemWidget();
       default:
         return _movieItemWidget();

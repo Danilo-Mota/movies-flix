@@ -6,7 +6,7 @@ import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/components/section_title_view.dart';
-import '../../support/utils/constants.dart';
+import '../../support/enums/movie_item_type.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
@@ -80,7 +80,7 @@ class HomeView extends StatelessWidget {
         (carouselMovies) {
           return MovieItemView(
             viewModel: carouselMovies,
-            itemType: Constants.carouselMovieItemType,
+            itemType: MovieItemType.carouselItem,
           );
         },
       ).toList(),
@@ -98,7 +98,7 @@ class HomeView extends StatelessWidget {
         (upcomingMoviesSlider) {
             return MovieItemView(
             viewModel: upcomingMoviesSlider,
-            itemType: Constants.suggestedMovieItemType,
+            itemType: MovieItemType.suggestedItem,
           );
         },
       ).toList(),
