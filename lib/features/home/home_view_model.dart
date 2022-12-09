@@ -10,15 +10,15 @@ import 'use_cases/get_top_rated_movies_use_case.dart';
 import 'use_cases/get_upcoming_movies_use_case.dart';
 
 class HomeViewModel extends HomeViewProtocol {
-  bool _moviesHasError = false;
-  bool _moviesIsLoading = false;
+  bool _hasMoviesError = false;
+  bool _isMoviesLoading = false;
   String _moviesErrorMessage = '';
   List<Movies> _popularMovies = [];
   List<Movies> _topRatedMovies = [];
   List<Movies> _upcomingMovies = [];
-  bool _popularMoviesIsLoading = false;
-  bool _topRatedMoviesIsLoading = false;
-  bool _upcomingMoviesIsLoading = false;
+  bool _isPopularMoviesLoading = false;
+  bool _isTopRatedMoviesLoading = false;
+  bool _isUpcomingMoviesLoading = false;
 
   final Localization l10n;
   final GetPopularMoviesUseCase popularMovieUseCase;
@@ -36,10 +36,10 @@ class HomeViewModel extends HomeViewProtocol {
   String get moviesErrorMessage => _moviesErrorMessage;
 
   @override
-  bool get moviesHasError => _moviesHasError;
+  bool get hasMoviesError => _hasMoviesError;
 
   @override
-  bool get moviesIsLoading => _moviesIsLoading;
+  bool get isMoviesLoading => _isMoviesLoading;
 
   @override
   List<MovieItemViewModelProtocol> get popularMovies {
@@ -64,18 +64,18 @@ class HomeViewModel extends HomeViewProtocol {
 
   @override
   void getPopularMovies() {
-    _popularMoviesIsLoading = true;
+    _isPopularMoviesLoading = true;
     _handleState();
 
     popularMovieUseCase.execute(
       success: (results) {
         _popularMovies = results.moviesResult;
-        _popularMoviesIsLoading = false;
+        _isPopularMoviesLoading = false;
         _handleState();
       },
       failure: (errorMessage) {
-        _moviesHasError = true;
-        _popularMoviesIsLoading = false;
+        _hasMoviesError = true;
+        _isPopularMoviesLoading = false;
         _handleState(errorMessage: errorMessage.description);
       },
     );
@@ -83,18 +83,18 @@ class HomeViewModel extends HomeViewProtocol {
 
   @override
   void getTopRatedMovies() {
-    _topRatedMoviesIsLoading = true;
+    _isTopRatedMoviesLoading = true;
     _handleState();
 
     topRatedMovieUseCase.execute(
       success: (results) {
         _topRatedMovies = results.moviesResult;
-        _topRatedMoviesIsLoading = false;
+        _isTopRatedMoviesLoading = false;
         _handleState();
       },
       failure: (errorMessage) {
-        _moviesHasError = true;
-        _topRatedMoviesIsLoading = false;
+        _hasMoviesError = true;
+        _isTopRatedMoviesLoading = false;
         _handleState(errorMessage: errorMessage.description);
       },
     );
@@ -102,18 +102,18 @@ class HomeViewModel extends HomeViewProtocol {
 
   @override
   void getUpcomingMovies() {
-    _upcomingMoviesIsLoading = true;
+    _isUpcomingMoviesLoading = true;
     _handleState();
 
     upcomingMovieUseCase.execute(
       success: (results) {
         _upcomingMovies = results.moviesResult;
-        _upcomingMoviesIsLoading = false;
+        _isUpcomingMoviesLoading = false;
         _handleState();
       },
       failure: (errorMessage) {
-        _moviesHasError = true;
-        _upcomingMoviesIsLoading = false;
+        _hasMoviesError = true;
+        _isUpcomingMoviesLoading = false;
         _handleState(errorMessage: errorMessage.description);
       },
     );
@@ -126,16 +126,16 @@ class HomeViewModel extends HomeViewProtocol {
   }
 
   void _checkLoading() {
-    if (_popularMoviesIsLoading || _topRatedMoviesIsLoading || _upcomingMoviesIsLoading) {
-      _moviesIsLoading = true;
+    if (_isPopularMoviesLoading || _isTopRatedMoviesLoading || _isUpcomingMoviesLoading) {
+      _isMoviesLoading = true;
     } else {
-      _moviesIsLoading = false;
+      _isMoviesLoading = false;
     }
   }
 
   void _checkIfHasError({String? errorMessage}) {
-    if (_moviesHasError) {
-      errorMessage.let((it) => {if (it.isNotEmpty) _moviesErrorMessage = it});
+    if (_hasMoviesError) {
+      errorMessage.let((it) => { if (it.isNotEmpty) _moviesErrorMessage = it });
     }
   }
 }

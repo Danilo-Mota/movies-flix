@@ -10,8 +10,8 @@ import '../../support/enums/movie_item_type.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
-  bool get moviesHasError;
-  bool get moviesIsLoading;
+  bool get hasMoviesError;
+  bool get isMoviesLoading;
   String get moviesErrorMessage;
   List<MovieItemViewModelProtocol> get popularMovies;
   List<MovieItemViewModelProtocol> get topRatedMovies;
@@ -39,8 +39,8 @@ class HomeView extends StatelessWidget {
   Widget _handleMoviesStateWidget(BuildContext context) {
     final l10n = Localize.instance.l10n;
 
-    if (viewModel.moviesIsLoading) return const LoadingPlaceholderView();
-    if (viewModel.moviesHasError) {
+    if (viewModel.isMoviesLoading) return const LoadingPlaceholderView();
+    if (viewModel.hasMoviesError) {
       return ErrorPlaceholderView(errorMessage: viewModel.moviesErrorMessage);
     }
 
