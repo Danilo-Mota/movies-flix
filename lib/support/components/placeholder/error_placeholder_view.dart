@@ -22,7 +22,7 @@ class ErrorPlaceholderView extends StatelessWidget {
           Center(
             child: Image.asset(
               AppImage.icErrorPath,
-              width: 50,
+              width: 52,
             ),
           ),
           const SizedBox(height: 8),
