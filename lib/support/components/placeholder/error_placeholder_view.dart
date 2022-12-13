@@ -26,12 +26,10 @@ class ErrorPlaceholderView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Center(
-            child: Text(
-              errorMessage,
-              textAlign: TextAlign.center,
-              style: AppFonts.nunitoSemiBold(16, AppColors.white),
-            ),
+          Text(
+            errorMessage,
+            textAlign: TextAlign.center,
+            style: AppFonts.nunitoSemiBold(16, AppColors.white),
           )
         ],
       ),
