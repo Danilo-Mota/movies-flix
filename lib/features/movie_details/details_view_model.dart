@@ -1,10 +1,11 @@
 import '../../model/movie_details.dart';
+import '../../support/utils/constants.dart';
 import 'details_view_controller.dart';
 import 'use_cases/get_details_use_case.dart';
 
 class DetailsViewModel extends DetailsViewProtocol {
   final int movieId;
-  late MovieDetails details;
+  MovieDetails? details;
   final GetMovieDetailsUseCase detailsUseCase;
 
   bool _hasDetailsError = false;
@@ -14,31 +15,42 @@ class DetailsViewModel extends DetailsViewProtocol {
   DetailsViewModel({required this.movieId, required this.detailsUseCase});
 
   @override
+  String? get title => details?.title;
+
+  @override
   String get overview => throw UnimplementedError();
 
   @override
-  String get posterPath => throw UnimplementedError();
+  String get posterPath => '${Constants.imageBaseURL}${details?.posterPath}';
 
   @override
-  String get title => throw UnimplementedError();
+  bool get hasDetailsError => _hasDetailsError;
+
+  @override
+  bool get isDetailsLoading => _isDetailsLoading;
+
+  @override
+  String get detailsErrorMessage => _detailsErrorMessage;
 
   @override
   void getMovieDetails() {
-    showLoading(true);
+    showLoading(isLoading: true);
+
     detailsUseCase.execute(
       movieId: movieId,
       success: (results) {
         details = results;
-        showLoading(false);
+        showLoading(isLoading: false);
       },
       failure: (errorMessage) {
         _hasDetailsError = true;
-        showLoading(false);
+        _detailsErrorMessage = errorMessage.description;
+        showLoading(isLoading: false);
       },
     );
   }
 
-  void showLoading(bool isLoading) {
+  void showLoading({required bool isLoading}) {
     _isDetailsLoading = isLoading;
     notifyListeners();
   }
