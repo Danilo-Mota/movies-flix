@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../enums/movie_item_type.dart';
 import '../../style/app_colors.dart';
 import '../../style/app_fonts.dart';
-import '../../utils/constants.dart';
 import '../../utils/localize.dart';
 
 abstract class MovieItemViewModelProtocol {
