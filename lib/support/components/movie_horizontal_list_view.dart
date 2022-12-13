@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../enums/movie_item_type.dart';
 import 'movies_item/movie_item_view.dart';
 
 class MovieHorizontalList extends StatelessWidget {
@@ -25,7 +26,7 @@ class MovieHorizontalList extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: MovieItemView(
                 viewModel: movies[index],
-                itemTypeIsCarousel: false,
+                itemType: MovieItemType.movieItem,
               ),
             ),
           );

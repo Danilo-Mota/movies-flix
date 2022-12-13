@@ -14,27 +14,25 @@ class ErrorPlaceholderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Image.asset(
-            AppImage.icErrorPath,
-            width: width * 0.15,
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Image.asset(
+              AppImage.icErrorPath,
+              width: 52,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Center(
-          child: Text(
+          const SizedBox(height: 8),
+          Text(
             errorMessage,
             textAlign: TextAlign.center,
             style: AppFonts.nunitoSemiBold(16, AppColors.white),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

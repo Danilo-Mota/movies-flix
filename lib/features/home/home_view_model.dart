@@ -1,3 +1,5 @@
+import 'package:flutter_gen/gen_l10n/localization.dart';
+
 import '../../model/movies.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/movies_item/movie_item_view_model.dart';
@@ -18,11 +20,13 @@ class HomeViewModel extends HomeViewProtocol {
   bool _isTopRatedMoviesLoading = false;
   bool _isUpcomingMoviesLoading = false;
 
+  final Localization l10n;
   final GetPopularMoviesUseCase popularMovieUseCase;
   final GetTopRatedMoviesUseCase topRatedMovieUseCase;
   final GetUpcomingMoviesUseCase upcomingMovieUseCase;
 
   HomeViewModel({
+    required this.l10n,
     required this.topRatedMovieUseCase,
     required this.popularMovieUseCase,
     required this.upcomingMovieUseCase,
@@ -40,21 +44,21 @@ class HomeViewModel extends HomeViewProtocol {
   @override
   List<MovieItemViewModelProtocol> get popularMovies {
     return _popularMovies.map((popularMovie) {
-      return MovieItemViewModel(movie: popularMovie);
+      return MovieItemViewModel(movie: popularMovie, l10n: l10n);
     }).toList();
   }
 
   @override
   List<MovieItemViewModelProtocol> get topRatedMovies {
     return _topRatedMovies.map((topRatedMovie) {
-      return MovieItemViewModel(movie: topRatedMovie);
+      return MovieItemViewModel(movie: topRatedMovie, l10n: l10n);
     }).toList();
   }
 
   @override
   List<MovieItemViewModelProtocol> get upcomingMovies {
     return _upcomingMovies.map((upcomingMovie) {
-      return MovieItemViewModel(movie: upcomingMovie, showRating: false);
+      return MovieItemViewModel(movie: upcomingMovie, l10n: l10n, showRating: false);
     }).toList();
   }
 

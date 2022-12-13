@@ -6,6 +6,7 @@ import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/error_placeholder_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/components/section_title_view.dart';
+import '../../support/enums/movie_item_type.dart';
 import '../../support/utils/localize.dart';
 
 abstract class HomeViewModelProtocol extends ChangeNotifier {
@@ -54,6 +55,9 @@ class HomeView extends StatelessWidget {
             SectionTitleView(title: l10n.topRatedMoviesLabel),
             MovieHorizontalList(movies: viewModel.topRatedMovies),
             const SizedBox(height: 16),
+            SectionTitleView(title: l10n.suggestionsForYouLabel),
+            _suggestedMovies(),
+            const SizedBox(height: 32),
             SectionTitleView(title: l10n.popularMoviesLabel),
             MovieHorizontalList(movies: viewModel.popularMovies),
             const SizedBox(height: 16),
@@ -76,7 +80,25 @@ class HomeView extends StatelessWidget {
         (carouselMovies) {
           return MovieItemView(
             viewModel: carouselMovies,
-            itemTypeIsCarousel: true,
+            itemType: MovieItemType.carouselItem,
+          );
+        },
+      ).toList(),
+    );
+  }
+
+    Widget _suggestedMovies() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        autoPlay: true,
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
+      ),
+      items: viewModel.upcomingMovies.map(
+        (upcomingMoviesSlider) {
+            return MovieItemView(
+            viewModel: upcomingMoviesSlider,
+            itemType: MovieItemType.suggestedItem,
           );
         },
       ).toList(),
