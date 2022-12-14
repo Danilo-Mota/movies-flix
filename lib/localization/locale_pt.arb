@@ -13,6 +13,7 @@
   "suggestionsForYouLabel" : "Sugestões para você",
   "votesLabel" : "Votos: ",
   "popularityLabel" : "Popularidade: ",
+  "authorNameLabel" : "Nome do autor",
   
   "requestError": "Aconteceu um erro inesperado com os nossos servidores.",
   "timeoutError": "O tempo de requisição esgotou, tente novamente mais tarde.",

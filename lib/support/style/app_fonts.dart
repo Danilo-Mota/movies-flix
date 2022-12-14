@@ -18,6 +18,14 @@ class AppFonts {
     );
   }
 
+  static TextStyle montserratRegular(double size, Color color) {
+    return GoogleFonts.montserrat(
+      color: color,
+      fontSize: size,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
   static TextStyle nunitoSemiBold(double size, Color color) {
     return GoogleFonts.nunito(
       color: color,

@@ -20,7 +20,10 @@ class DetailsViewModel extends DetailsViewProtocol {
   String get title => details?.title ?? '';
 
   @override
-  String get overview => throw UnimplementedError();
+  String get rating => '${details?.rate.toStringAsFixed(1) ?? ''}${Constants.maxRatingPlaceholder}';
+
+  @override
+  String get overview => details?.overview ?? '';
 
   @override
   String get posterPath => '${Constants.imageBaseURL}${details?.posterPath}';
@@ -37,8 +40,9 @@ class DetailsViewModel extends DetailsViewProtocol {
   @override
   List<GenresViewModelProtocol> get genres {
     return details?.genders.map((genre) {
-      return GenresViewModel();
-    }).toList() ?? [];
+          return GenresViewModel(genre: genre);
+        }).toList() ??
+        [];
   }
 
   @override
