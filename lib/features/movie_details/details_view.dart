@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../support/components/placeholder/loading_placeholder_view.dart';
+import 'items/genres_item_view.dart';
 
 abstract class DetailsViewModelProtocol with ChangeNotifier {
-  String? get title;
+  String get title;
   String get overview;
   String get posterPath;
   bool get hasDetailsError;
   bool get isDetailsLoading;
   String get detailsErrorMessage;
+  List<GenresViewModelProtocol> get genres;
 }
 
 class DetailsView extends StatelessWidget {
@@ -22,33 +24,38 @@ class DetailsView extends StatelessWidget {
       body: AnimatedBuilder(
         animation: viewModel,
         builder: (_, __) {
-          return test();
+          return _detailsWidgets();
         },
       ),
     );
   }
 
-  Widget test() {
+  Widget _detailsWidgets() {
     if (viewModel.isDetailsLoading) return const LoadingPlaceholderView();
-    return Column(
-      children: [
-        Flexible(
-          flex: 5,
-          child: Image.network(
-            viewModel.posterPath,
-            fit: BoxFit.fill,
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-              color: Colors.green,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            flex: 5,
+            child: Image.network(
+              viewModel.posterPath,
+              fit: BoxFit.fill,
             ),
           ),
-        ),
-      ],
+          Flexible(
+            flex: 2,
+            child: ListView.builder(
+              itemCount: viewModel.genres.length,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (_, index) {
+                return GenresItemView(viewModel: viewModel.genres[index]);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

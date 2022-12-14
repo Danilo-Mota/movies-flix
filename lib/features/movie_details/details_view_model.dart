@@ -1,6 +1,8 @@
 import '../../model/movie_details.dart';
 import '../../support/utils/constants.dart';
 import 'details_view_controller.dart';
+import 'items/genres_item_view.dart';
+import 'items/genres_view_model.dart';
 import 'use_cases/get_details_use_case.dart';
 
 class DetailsViewModel extends DetailsViewProtocol {
@@ -15,7 +17,7 @@ class DetailsViewModel extends DetailsViewProtocol {
   DetailsViewModel({required this.movieId, required this.detailsUseCase});
 
   @override
-  String? get title => details?.title;
+  String get title => details?.title ?? '';
 
   @override
   String get overview => throw UnimplementedError();
@@ -31,6 +33,13 @@ class DetailsViewModel extends DetailsViewProtocol {
 
   @override
   String get detailsErrorMessage => _detailsErrorMessage;
+
+  @override
+  List<GenresViewModelProtocol> get genres {
+    return details?.genders.map((genre) {
+      return GenresViewModel();
+    }).toList() ?? [];
+  }
 
   @override
   void getMovieDetails() {
