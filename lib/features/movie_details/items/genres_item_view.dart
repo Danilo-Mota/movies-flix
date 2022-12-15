@@ -19,7 +19,7 @@ class GenresItemView extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: AppColors.green,
+        color: AppColors.darkGreen,
       ),
       child: Text(
         viewModel.genreName,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../support/components/movie_horizontal_list_view.dart';
+import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
@@ -11,10 +13,12 @@ abstract class DetailsViewModelProtocol with ChangeNotifier {
   String get rating;
   String get overview;
   String get posterPath;
-  bool get hasDetailsError;
-  bool get isDetailsLoading;
-  String get detailsErrorMessage;
   List<GenresViewModelProtocol> get genres;
+  List<MovieItemViewModelProtocol> get similarMovies;
+
+  bool get hasError;
+  bool get isLoading;
+  String get errorMessage;
 }
 
 class DetailsView extends StatelessWidget {
@@ -37,7 +41,7 @@ class DetailsView extends StatelessWidget {
   Widget _detailsWidgets() {
     final l10n = Localize.instance.l10n;
 
-    if (viewModel.isDetailsLoading) return const LoadingPlaceholderView();
+    if (viewModel.isLoading) return const LoadingPlaceholderView();
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -105,18 +109,54 @@ class DetailsView extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            'Sinopse',
-            style: AppFonts.montserratBold(14, AppColors.white),
-            textAlign: TextAlign.start,
+          const SizedBox(height: 8),
+          Container(
+            margin: const EdgeInsets.only(top: 12),
+            child: Text(
+              l10n.synopsisLabel,
+              style: AppFonts.montserratBold(14, AppColors.white),
+              textAlign: TextAlign.start,
+            ),
           ),
           const SizedBox(height: 8),
-          Text(
-            viewModel.overview,
-            style: AppFonts.nunitoRegular(14, AppColors.white),
-            textAlign: TextAlign.start,
-          )
+          _roundedGreenContainer(width: 20, height: 4),
+          const SizedBox(height: 16),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              viewModel.overview,
+              style: AppFonts.nunitoRegular(14, AppColors.white),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          const SizedBox(height: 40),
+          Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: 8, left: 16),
+                child: _roundedGreenContainer(width: 4, height: 20),
+              ),
+              Text(
+                l10n.similarItemsLabel,
+                style: AppFonts.montserratBold(14, AppColors.white),
+                textAlign: TextAlign.start,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          MovieHorizontalList(movies: viewModel.similarMovies)
         ],
+      ),
+    );
+  }
+
+  Container _roundedGreenContainer({required double width, required double height}) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: const BoxDecoration(
+        color: AppColors.darkGreen,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
     );
   }

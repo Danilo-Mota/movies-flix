@@ -12,10 +12,10 @@ abstract class MovieItemViewModelDelegate {
 class MovieItemViewModel extends MovieItemViewModelProtocol {
   final Movies movie;
   final bool showRating;
-  final Localization l10n;
+  final Localization? l10n;
   final MovieItemViewModelDelegate delegate;
 
-  MovieItemViewModel({required this.delegate, required this.l10n, required this.movie, this.showRating = true});
+  MovieItemViewModel({required this.delegate, this.l10n, required this.movie, this.showRating = true});
 
   @override
   String get posterPath => '${Constants.imageBaseURL}${movie.posterPath}';
@@ -35,10 +35,10 @@ class MovieItemViewModel extends MovieItemViewModelProtocol {
   String get releaseDate => movie.releaseDate.toFormatDate();
 
   @override
-  String get voteCount => '${l10n.votesLabel} ${movie.voteCount}';
+  String get voteCount => '${l10n?.votesLabel ?? ''} ${movie.voteCount}';
 
   @override
-  String get popularity => '${l10n.popularityLabel} ${movie.popularity.toStringAsFixed(0)}';
+  String get popularity => '${l10n?.popularityLabel ?? ''} ${movie.popularity.toStringAsFixed(0)}';
 
   @override
   int get movieId => movie.id;

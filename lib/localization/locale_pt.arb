@@ -14,6 +14,8 @@
   "votesLabel" : "Votos: ",
   "popularityLabel" : "Popularidade: ",
   "authorNameLabel" : "Nome do autor",
+  "synopsisLabel" : "Sinopse",
+   "similarItemsLabel" : "Itens Similares",
   
   "requestError": "Aconteceu um erro inesperado com os nossos servidores.",
   "timeoutError": "O tempo de requisição esgotou, tente novamente mais tarde.",

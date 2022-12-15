@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'details_view.dart';
 
 abstract class DetailsViewProtocol extends DetailsViewModelProtocol {
-    void getMovieDetails();
+  void getMovieDetails();
+  void getSimilarMovies();
 }
 
 class DetailsViewController extends StatefulWidget {
@@ -16,10 +17,10 @@ class DetailsViewController extends StatefulWidget {
 }
 
 class _DetailsViewControllerState extends State<DetailsViewController> {
-
   @override
   void initState() {
     widget.viewModel.getMovieDetails();
+    widget.viewModel.getSimilarMovies();
     super.initState();
   }
 
