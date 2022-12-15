@@ -60,8 +60,18 @@ class DetailsViewModel extends DetailsViewProtocol implements MovieItemViewModel
   @override
   List<MovieItemViewModelProtocol> get similarMovies {
     return _similarMovies.map((similarMovie) {
-          return MovieItemViewModel(movie: similarMovie, delegate: this, showRating: false);
-        }).toList();
+      return MovieItemViewModel(movie: similarMovie, delegate: this, showRating: false);
+    }).toList();
+  }
+
+  @override
+  void didTapMovie({required int movieId}) {
+    onTapMovie?.call(movieId);
+  }
+
+  @override
+  void didTapBack() {
+    onTapBack?.call();
   }
 
   @override
@@ -123,7 +133,4 @@ class DetailsViewModel extends DetailsViewProtocol implements MovieItemViewModel
       errorMessage.let((it) => {if (it.isNotEmpty) _errorMessage = it});
     }
   }
-  
-  @override
-  void didTapMovie({required int movieId}) {}
 }

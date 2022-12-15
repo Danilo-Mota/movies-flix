@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../support/components/movie_horizontal_list_view.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
+import '../../support/style/app_image.dart';
 import '../../support/utils/localize.dart';
 import 'items/genres_item_view.dart';
 
@@ -19,6 +21,8 @@ abstract class DetailsViewModelProtocol with ChangeNotifier {
   bool get hasError;
   bool get isLoading;
   String get errorMessage;
+
+  void didTapBack();
 }
 
 class DetailsView extends StatelessWidget {
@@ -48,9 +52,28 @@ class DetailsView extends StatelessWidget {
         children: [
           Flexible(
             flex: 5,
-            child: Image.network(
-              viewModel.posterPath,
-              fit: BoxFit.fill,
+            child: Stack(
+              children: [
+                Image.network(
+                  viewModel.posterPath,
+                  fit: BoxFit.fill,
+                ),
+                Positioned(
+                  left: 32,
+                  top: 64,
+                  child: InkWell(
+                    onTap: () {
+                      viewModel.didTapBack();
+                    },
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: SvgPicture.asset(AppImage.icArrowPath),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
