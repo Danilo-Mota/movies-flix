@@ -1,8 +1,13 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+
+import 'search_view.dart';
+
+abstract class SearchViewProtocol extends SearchViewModelProtocol {}
 
 class SearchViewController extends StatefulWidget {
-  const SearchViewController({super.key});
+  final SearchViewProtocol viewModel;
+
+  const SearchViewController({super.key, required this.viewModel});
 
   @override
   State<SearchViewController> createState() => _SearchViewControllerState();
@@ -11,6 +16,6 @@ class SearchViewController extends StatefulWidget {
 class _SearchViewControllerState extends State<SearchViewController> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SearchView(viewModel: widget.viewModel);
   }
 }

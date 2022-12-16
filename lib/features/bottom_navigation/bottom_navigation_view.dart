@@ -5,6 +5,7 @@ import '../../support/style/app_colors.dart';
 import '../../support/style/app_image.dart';
 import '../../support/utils/localize.dart';
 import '../home/di/home_factory.dart';
+import '../search/di/search_factory.dart';
 
 abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
   int get currentIndex;
@@ -15,6 +16,7 @@ abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
 class BottomNavigationView extends StatelessWidget {
   final BottomNavigationViewModelProtocol viewModel;
   final StatefulWidget homeView = HomeFactory.home();
+  final StatefulWidget searchView = SearchFactory.search();
 
   BottomNavigationView({super.key, required this.viewModel});
 
@@ -29,7 +31,8 @@ class BottomNavigationView extends StatelessWidget {
           body: IndexedStack(
             index: viewModel.currentIndex,
             children: [
-              homeView
+              homeView,
+              searchView
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
