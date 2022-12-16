@@ -62,9 +62,7 @@ class DetailsView extends StatelessWidget {
                   left: 32,
                   top: 64,
                   child: InkWell(
-                    onTap: () {
-                      viewModel.didTapBack();
-                    },
+                    onTap: viewModel.didTapBack,
                     child: Container(
                       width: 24,
                       height: 24,

@@ -121,11 +121,7 @@ class DetailsViewModel extends DetailsViewProtocol implements MovieItemViewModel
   }
 
   void _checkLoading() {
-    if (_isDetailsLoading || _isSimilarMoviesLoading) {
-      _isLoading = true;
-    } else {
-      _isLoading = false;
-    }
+    _isLoading = (_isDetailsLoading || _isSimilarMoviesLoading);
   }
 
   void _checkIfHasError({String? errorMessage}) {
