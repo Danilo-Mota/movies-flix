@@ -5,6 +5,7 @@ abstract class MoviesRoutesProtocol {
   void getPopularMovies({Success? success, Failure? failure});
   void getTopRatedMovies({Success? success, Failure? failure});
   void getUpcomingMovies({Success? success, Failure? failure});
+  void getSearchMovies({required String searchText, Success? success, Failure? failure});
 }
 
 class MoviesRoutes extends MoviesRoutesProtocol {
@@ -25,6 +26,12 @@ class MoviesRoutes extends MoviesRoutesProtocol {
   @override
   void getUpcomingMovies({Success? success, Failure? failure}) {
     final endpoint = Endpoint(path: '/movie/upcoming', method: 'GET');
+    _provider.request(endpoint: endpoint, success: success, failure: failure);
+  }
+
+  @override
+  void getSearchMovies({required String searchText, Success? success, Failure? failure}) {
+    final endpoint = Endpoint(path: '/search/movie', method: 'GET', queryParameters: {'query' : searchText});
     _provider.request(endpoint: endpoint, success: success, failure: failure);
   }
 }
