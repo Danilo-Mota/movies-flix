@@ -52,7 +52,7 @@ class DetailsViewModel extends DetailsViewProtocol implements MovieItemViewModel
 
   @override
   List<GenresViewModelProtocol> get genres {
-    return _details?.genders.map((genre) {
+    return _details?.genres.map((genre) {
           return GenresViewModel(genre: genre);
         }).toList() ?? [];
   }

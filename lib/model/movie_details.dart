@@ -7,7 +7,7 @@ class MovieDetails {
   final String overview;
   final String posterPath;
   final String releaseDate;
-  final List<Genre> genders;
+  final List<Genre> genres;
 
   MovieDetails.fromMap(Map<String, dynamic> map)
       : id = map['id'],
@@ -16,5 +16,5 @@ class MovieDetails {
         overview = map['overview'],
         posterPath = map['poster_path'],
         releaseDate = map['release_date'],
-        genders = List<Genre>.from(map['genres']?.map((map) => Genre.fromMap(map)));
+        genres = List<Genre>.from(map['genres']?.map((map) => Genre.fromMap(map)));
 }
