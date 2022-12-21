@@ -34,6 +34,7 @@ class MoviesRoutes extends MoviesRoutesProtocol {
   @override
   void getSearchMovies({required String searchText, Success? success, Failure? failure}) {
     final endpoint = Endpoint(path: '/search/movie', method: 'GET', queryParameters: {'query': searchText});
+    _provider.request(endpoint: endpoint, success: success, failure: failure);
   }
 
   @override
