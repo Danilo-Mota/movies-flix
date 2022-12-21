@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../support/components/placeholder/error_placeholder_view.dart';
+import '../../support/components/placeholder/loading_placeholder_view.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
 import '../../support/utils/localize.dart';
 import 'items/search_movie_item_view.dart';
 
 abstract class SearchViewModelProtocol with ChangeNotifier {
+  bool get isLoading;
+  String? get errorMessage;
   List<SearchMovieItemViewModelProtocol> get searchMovies;
+
   void getSearchedMovies(String text);
 }
 
@@ -62,6 +67,11 @@ class SearchView extends StatelessWidget {
   }
 
   Widget _researchedMovies() {
+    if (viewModel.isLoading) return const Expanded(child: LoadingPlaceholderView());
+    if (viewModel.errorMessage != null) {
+      return Expanded(child: ErrorPlaceholderView(errorMessage: viewModel.errorMessage));
+    }
+
     return Expanded(
       child: ListView.builder(
         itemCount: viewModel.searchMovies.length,

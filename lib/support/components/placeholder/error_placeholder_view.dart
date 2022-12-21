@@ -6,7 +6,7 @@ import '../../style/app_fonts.dart';
 import '../../style/app_image.dart';
 
 class ErrorPlaceholderView extends StatelessWidget {
-  final String errorMessage;
+  final String? errorMessage;
 
   const ErrorPlaceholderView({super.key, required this.errorMessage});
 
@@ -25,7 +25,7 @@ class ErrorPlaceholderView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            errorMessage,
+            errorMessage ?? '',
             textAlign: TextAlign.center,
             style: AppFonts.nunitoSemiBold(16, AppColors.white),
           )
