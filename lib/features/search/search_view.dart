@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_fonts.dart';
 import '../../support/utils/localize.dart';
+import 'items/search_movie_item_view.dart';
 
 abstract class SearchViewModelProtocol with ChangeNotifier {
+  List<SearchMovieItemViewModelProtocol> get searchMovies;
   void getSearchedMovies(String text);
 }
 
@@ -20,6 +22,13 @@ class SearchView extends StatelessWidget {
         child: Column(
           children: [
             _searchFieldWidget(),
+            const SizedBox(height: 12),
+            AnimatedBuilder(
+              animation: viewModel,
+              builder: (_, __) {
+                return _researchedMovies();
+              },
+            ),
           ],
         ),
       ),
@@ -37,7 +46,7 @@ class SearchView extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
-        onChanged: (text) {
+        onSubmitted: (text) {
           viewModel.getSearchedMovies(text);
         },
         style: AppFonts.nunitoBold(16, AppColors.black),
@@ -48,6 +57,27 @@ class SearchView extends StatelessWidget {
           hintText: l10n.searchMovieLabel,
           hintStyle: AppFonts.nunitoBold(16, AppColors.black),
         ),
+      ),
+    );
+  }
+
+  Widget _researchedMovies() {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: viewModel.searchMovies.length,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (_, index) {
+          return SizedBox(
+            width: 180,
+            height: 220,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: SearchMovieItemView(
+                viewModel: viewModel.searchMovies[index],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
