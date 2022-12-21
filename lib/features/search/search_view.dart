@@ -60,7 +60,7 @@ class SearchView extends StatelessWidget {
           border: InputBorder.none,
           contentPadding: EdgeInsets.zero,
           hintText: l10n.searchMovieLabel,
-          hintStyle: AppFonts.nunitoBold(16, AppColors.black),
+          hintStyle: AppFonts.nunitoRegular(16, AppColors.gray),
         ),
       ),
     );
