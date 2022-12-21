@@ -9,7 +9,7 @@ import 'use_cases/get_popular_movies_use_case.dart';
 import 'use_cases/get_top_rated_movies_use_case.dart';
 import 'use_cases/get_upcoming_movies_use_case.dart';
 
-class HomeViewModel extends HomeViewProtocol {
+class HomeViewModel extends HomeViewProtocol implements MovieItemViewModelDelegate {
   bool _hasMoviesError = false;
   bool _isMoviesLoading = false;
   String _moviesErrorMessage = '';
@@ -44,22 +44,27 @@ class HomeViewModel extends HomeViewProtocol {
   @override
   List<MovieItemViewModelProtocol> get popularMovies {
     return _popularMovies.map((popularMovie) {
-      return MovieItemViewModel(movie: popularMovie, l10n: l10n);
+      return MovieItemViewModel(movie: popularMovie, delegate: this, l10n: l10n);
     }).toList();
   }
 
   @override
   List<MovieItemViewModelProtocol> get topRatedMovies {
     return _topRatedMovies.map((topRatedMovie) {
-      return MovieItemViewModel(movie: topRatedMovie, l10n: l10n);
+      return MovieItemViewModel(movie: topRatedMovie, delegate: this, l10n: l10n);
     }).toList();
   }
 
   @override
   List<MovieItemViewModelProtocol> get upcomingMovies {
     return _upcomingMovies.map((upcomingMovie) {
-      return MovieItemViewModel(movie: upcomingMovie, l10n: l10n, showRating: false);
+      return MovieItemViewModel(movie: upcomingMovie, delegate: this, l10n: l10n, showRating: false);
     }).toList();
+  }
+
+  @override
+  void didTapMovie({required int movieId}) {
+    onTapMovie?.call(movieId);
   }
 
   @override
@@ -135,7 +140,7 @@ class HomeViewModel extends HomeViewProtocol {
 
   void _checkIfHasError({String? errorMessage}) {
     if (_hasMoviesError) {
-      errorMessage.let((it) => { if (it.isNotEmpty) _moviesErrorMessage = it });
+      errorMessage.let((it) => {if (it.isNotEmpty) _moviesErrorMessage = it});
     }
   }
 }
