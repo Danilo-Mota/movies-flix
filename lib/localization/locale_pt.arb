@@ -14,7 +14,9 @@
   "votesLabel" : "Votos: ",
   "popularityLabel" : "Popularidade: ",
   "searchMovieLabel" : "Pesquisar filme",
-  
+  "authorNameLabel" : "Nome do autor",
+  "synopsisLabel" : "Sinopse",
+  "similarItemsLabel" : "Itens Similares",  
   "requestError": "Aconteceu um erro inesperado com os nossos servidores.",
   "timeoutError": "O tempo de requisição esgotou, tente novamente mais tarde.",
   "mappingFailureError": "Ocorreu um erro na requisição. Estamos trabalhando nisso!",

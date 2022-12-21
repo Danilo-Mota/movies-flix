@@ -7,6 +7,7 @@ import '../../style/app_fonts.dart';
 import '../../utils/localize.dart';
 
 abstract class MovieItemViewModelProtocol {
+  int get movieId;
   String get title;
   String get rating;
   String get voteCount;
@@ -14,6 +15,8 @@ abstract class MovieItemViewModelProtocol {
   String get popularity;
   String get releaseDate;
   bool get isRatingVisible;
+
+  void didTapMovie(int movieId);
 }
 
 class MovieItemView extends StatelessWidget {
@@ -45,11 +48,16 @@ class MovieItemView extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image(
-                    image: CachedNetworkImageProvider(viewModel.posterPath),
-                    fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: () {
+                    viewModel.didTapMovie(viewModel.movieId);
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image(
+                      image: CachedNetworkImageProvider(viewModel.posterPath),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -121,17 +129,22 @@ class MovieItemView extends StatelessWidget {
         Positioned(
           right: 24,
           bottom: 108,
-          child: Container(
-            width: 136,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              l10n.learnMoreLabel,
-              style: AppFonts.nunitoBold(16, AppColors.black),
+          child: InkWell(
+            onTap: () {
+              viewModel.didTapMovie(viewModel.movieId);
+            },
+            child: Container(
+              width: 136,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                l10n.learnMoreLabel,
+                style: AppFonts.nunitoBold(16, AppColors.black),
+              ),
             ),
           ),
         ),
