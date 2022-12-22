@@ -26,7 +26,10 @@ class SearchMovieItemView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
-          borderRadius: const BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(6),
+            bottomLeft: Radius.circular(6),
+          ),
           child: Image(
             image: CachedNetworkImageProvider(viewModel.posterPath),
             fit: BoxFit.cover,

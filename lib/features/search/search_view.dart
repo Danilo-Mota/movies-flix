@@ -51,9 +51,7 @@ class SearchView extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
-        onSubmitted: (text) {
-          viewModel.getSearchedMovies(text);
-        },
+        onSubmitted: viewModel.getSearchedMovies,
         style: AppFonts.nunitoBold(16, AppColors.black),
         decoration: InputDecoration(
           isDense: true,
