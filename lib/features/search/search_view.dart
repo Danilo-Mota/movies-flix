@@ -65,9 +65,11 @@ class SearchView extends StatelessWidget {
   }
 
   Widget _researchedMovies() {
+    final errorMessage = viewModel.errorMessage;
+    
     if (viewModel.isLoading) return const Expanded(child: LoadingPlaceholderView());
-    if (viewModel.errorMessage != null) {
-      return Expanded(child: ErrorPlaceholderView(errorMessage: viewModel.errorMessage));
+    if (errorMessage != null) {
+      return Expanded(child: ErrorPlaceholderView(errorMessage: errorMessage));
     }
 
     return Expanded(
