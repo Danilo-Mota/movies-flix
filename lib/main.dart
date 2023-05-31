@@ -13,10 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: AppTheme.theme,
-      initialRoute: MobileRouter.initialRoute,
-      routes: MobileRouter.routes,
+      routerConfig: MobileRouter.router,
       supportedLocales: Localization.supportedLocales,
       localizationsDelegates: Localization.localizationsDelegates,
       onGenerateTitle: (context) => Localize.instance.of(context).appTitle,

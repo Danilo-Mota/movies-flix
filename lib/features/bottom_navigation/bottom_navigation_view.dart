@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_image.dart';
@@ -15,10 +16,11 @@ abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
 
 class BottomNavigationView extends StatelessWidget {
   final BottomNavigationViewModelProtocol viewModel;
-  final StatefulWidget homeView = HomeFactory.home();
-  final StatefulWidget searchView = SearchFactory.search();
+  final StatefulNavigationShell navigationShell;
+  //final StatefulWidget homeView = HomeFactory.home();
+  //final StatefulWidget searchView = SearchFactory.search();
 
-  BottomNavigationView({super.key, required this.viewModel});
+  BottomNavigationView({super.key, required this.viewModel, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +30,16 @@ class BottomNavigationView extends StatelessWidget {
       animation: viewModel,
       builder: (_, __) {
         return Scaffold(
-          body: IndexedStack(
-            index: viewModel.currentIndex,
-            children: [
-              homeView,
-              searchView
-            ],
-          ),
+          body: navigationShell,
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: AppColors.blackLight,
-            currentIndex: viewModel.currentIndex,
-            onTap: viewModel.didTapSelectedIndex,
+            currentIndex: navigationShell.currentIndex,
+            onTap: (int index) => _onTap(context, index),
             showUnselectedLabels: false,
             selectedItemColor: AppColors.green,
             items: [
               _bottomNavigationBarItem(l10n.homeTitle, AppImage.icHomePath),
               _bottomNavigationBarItem(l10n.searchTitle, AppImage.icMagnifierPath),
-              _bottomNavigationBarItem(l10n.profileTitle, AppImage.icProfilePath),
             ],
           ),
         );
@@ -59,4 +54,15 @@ class BottomNavigationView extends StatelessWidget {
       icon: SvgPicture.asset(iconPath),
     );
   }
+
+    void _onTap(BuildContext context, int index) {
+    // When navigating to a new branch, it's recommended to use the goBranch
+    // method, as doing so makes sure the last navigation state of the
+    // Navigator for the branch is restored.
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
+  }
+
 }

@@ -20,8 +20,11 @@ class DetailsViewController extends StatefulWidget {
 }
 
 class _DetailsViewControllerState extends State<DetailsViewController> {
+  late final DetailsViewProtocol viewModel;
+
   @override
   void initState() {
+    viewModel = widget.viewModel;
     _bind();
     widget.viewModel.getMovieDetails();
     widget.viewModel.getSimilarMovies();
@@ -30,14 +33,14 @@ class _DetailsViewControllerState extends State<DetailsViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return DetailsView(viewModel: widget.viewModel);
+    return DetailsView(viewModel: viewModel);
   }
 
   void _bind() {
-    widget.viewModel.onTapMovie = (movieId) {
+    viewModel.onTapMovie = (movieId) {
       Navigator.pushNamed(context, MovieDetailsFactory.route, arguments: movieId);
     };
-    widget.viewModel.onTapBack = () {
+    viewModel.onTapBack = () {
       Navigator.pop(context);
     };
   }

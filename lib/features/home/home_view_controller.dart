@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../movie_details/di/details_factory.dart';
 import 'home_view.dart';
@@ -20,8 +21,11 @@ class HomeViewController extends StatefulWidget {
 }
 
 class _HomeViewController extends State<HomeViewController> {
+  late final HomeViewProtocol viewModel;
+
   @override
   void initState() {
+    viewModel = widget.viewModel;
     _bind();
     _getMovies();
     super.initState();
@@ -29,18 +33,19 @@ class _HomeViewController extends State<HomeViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return HomeView(viewModel: widget.viewModel);
+    return HomeView(viewModel: viewModel);
   }
 
   void _bind() {
-    widget.viewModel.onTapMovie = (movieId) {
-      Navigator.pushNamed(context, MovieDetailsFactory.route, arguments: movieId);
+    viewModel.onTapMovie = (movieId) {
+      GoRouter.of(context).go('/a/details', extra: movieId);
+      //Navigator.pushNamed(context, MovieDetailsFactory.route, arguments: movieId);
     };
   }
 
   void _getMovies() {
-    widget.viewModel.getPopularMovies();
-    widget.viewModel.getTopRatedMovies();
-    widget.viewModel.getUpcomingMovies();
+    viewModel.getPopularMovies();
+    viewModel.getTopRatedMovies();
+    viewModel.getUpcomingMovies();
   }
 }

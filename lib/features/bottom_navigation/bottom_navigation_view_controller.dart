@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'bottom_navigation_view.dart';
 
@@ -6,8 +7,9 @@ abstract class BottomNavigationViewControllerProtocol extends BottomNavigationVi
 
 class BottomNavigationViewController extends StatefulWidget {
   final BottomNavigationViewControllerProtocol viewModel;
+  final StatefulNavigationShell navigationShell;
 
-  const BottomNavigationViewController({super.key, required this.viewModel});
+  const BottomNavigationViewController({super.key, required this.viewModel, required this.navigationShell});
 
   @override
   State<StatefulWidget> createState() {
@@ -16,9 +18,11 @@ class BottomNavigationViewController extends StatefulWidget {
 }
 
 class _BottomNavigationViewControllerState extends State<BottomNavigationViewController> {
-
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationView(viewModel: widget.viewModel);
+    return BottomNavigationView(
+      viewModel: widget.viewModel,
+      navigationShell: widget.navigationShell,
+    );
   }
 }
