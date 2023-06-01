@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'details_view.dart';
 import 'di/details_factory.dart';
@@ -38,7 +39,7 @@ class _DetailsViewControllerState extends State<DetailsViewController> {
 
   void _bind() {
     viewModel.onTapMovie = (movieId) {
-      Navigator.pushNamed(context, MovieDetailsFactory.route, arguments: movieId);
+      GoRouter.of(context).pushNamed('/details', extra: movieId);
     };
     viewModel.onTapBack = () {
       Navigator.pop(context);
