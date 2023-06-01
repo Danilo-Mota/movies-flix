@@ -12,6 +12,8 @@ abstract class HomeViewProtocol extends HomeViewModelProtocol {
 }
 
 class HomeViewController extends StatefulWidget {
+  static const String route = '/home';
+
   const HomeViewController({super.key});
 
   @override

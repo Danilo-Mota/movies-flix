@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/bottom_navigation/di/bottom_navigation_factory.dart';
-import '../features/home/di/home_factory.dart';
+import '../features/home/home_view_controller.dart';
 import '../features/movie_details/di/details_factory.dart';
 import '../features/search/di/search_factory.dart';
 
 class MobileRouter {
-  static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-  static final GlobalKey<NavigatorState> _sectionANavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
+  static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> _sectionANavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: HomeViewController.route,
     routes: <RouteBase>[
       // bottom navigation com uma navegacao aninhada (nested)
       StatefulShellRoute.indexedStack(
@@ -26,9 +26,9 @@ class MobileRouter {
             routes: <RouteBase>[
               GoRoute(
                 parentNavigatorKey: _sectionANavigatorKey,
-                name: '/home',
-                path: '/home',
-                builder: (BuildContext context, GoRouterState state) => HomeFactory.home(),
+                name: HomeViewController.route,
+                path: HomeViewController.route,
+                builder: (BuildContext context, GoRouterState state) => const HomeViewController(),
                 routes: <RouteBase>[
                   // tela de detalhes da primeira tab
                   GoRoute(
@@ -50,7 +50,6 @@ class MobileRouter {
                 name: '/search',
                 path: '/search',
                 builder: (BuildContext context, GoRouterState state) => SearchFactory.search(),
-                routes: <RouteBase>[],
               ),
             ],
           ),
