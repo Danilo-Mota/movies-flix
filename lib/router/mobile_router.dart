@@ -12,47 +12,43 @@ class MobileRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/a',
+    initialLocation: '/home',
     routes: <RouteBase>[
+      // bottom navigation com uma navegacao aninhada (nested)
       StatefulShellRoute.indexedStack(
         builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
           return BottomNavigationFactory.bottomNavigation(navigationShell);
         },
         branches: <StatefulShellBranch>[
-          // The route branch for the first tab of the bottom navigation bar.
+          // primeira tab
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the first tab of the
-                // bottom navigation bar.
-                path: '/a',
+                parentNavigatorKey: _sectionANavigatorKey,
+                name: '/home',
+                path: '/home',
                 builder: (BuildContext context, GoRouterState state) => HomeFactory.home(),
                 routes: <RouteBase>[
-                  
-                  // The details screen to display stacked on navigator of the
-                  // first tab. This will cover screen A but not the application
-                  // shell (bottom navigation bar).
+                  // tela de detalhes da primeira tab
                   GoRoute(
-                      path: 'details',
-                      builder: (BuildContext context, GoRouterState state) {
-                        final id = state.extra as int;
-                        return MovieDetailsFactory.details(id);
-                      }),
+                    parentNavigatorKey: _rootNavigatorKey,
+                    name: '/details',
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) {
+                      final id = state.extra as int;
+                      return MovieDetailsFactory.details(id);
+                    },
+                  ),
                 ],
               ),
             ],
           ),
-
-          // The route branch for the second tab of the bottom navigation bar.
           StatefulShellBranch(
-            // It's not necessary to provide a navigatorKey if it isn't also
-            // needed elsewhere. If not provided, a default key will be used.
             routes: <RouteBase>[
               GoRoute(
-                // The screen to display as the root in the second tab of the
-                // bottom navigation bar.
-                path: '/b',
+                name: '/search',
+                path: '/search',
                 builder: (BuildContext context, GoRouterState state) => SearchFactory.search(),
                 routes: <RouteBase>[],
               ),

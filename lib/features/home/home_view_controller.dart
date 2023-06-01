@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../movie_details/di/details_factory.dart';
 import 'home_view.dart';
 
 abstract class HomeViewProtocol extends HomeViewModelProtocol {
@@ -38,7 +37,7 @@ class _HomeViewController extends State<HomeViewController> {
 
   void _bind() {
     viewModel.onTapMovie = (movieId) {
-      GoRouter.of(context).go('/a/details', extra: movieId);
+      GoRouter.of(context).goNamed('/details', extra: movieId);
       //Navigator.pushNamed(context, MovieDetailsFactory.route, arguments: movieId);
     };
   }

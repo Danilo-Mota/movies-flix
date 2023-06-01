@@ -5,8 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../support/style/app_colors.dart';
 import '../../support/style/app_image.dart';
 import '../../support/utils/localize.dart';
-import '../home/di/home_factory.dart';
-import '../search/di/search_factory.dart';
 
 abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
   int get currentIndex;
@@ -17,10 +15,8 @@ abstract class BottomNavigationViewModelProtocol with ChangeNotifier {
 class BottomNavigationView extends StatelessWidget {
   final BottomNavigationViewModelProtocol viewModel;
   final StatefulNavigationShell navigationShell;
-  //final StatefulWidget homeView = HomeFactory.home();
-  //final StatefulWidget searchView = SearchFactory.search();
 
-  BottomNavigationView({super.key, required this.viewModel, required this.navigationShell});
+  const BottomNavigationView({super.key, required this.viewModel, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +52,6 @@ class BottomNavigationView extends StatelessWidget {
   }
 
     void _onTap(BuildContext context, int index) {
-    // When navigating to a new branch, it's recommended to use the goBranch
-    // method, as doing so makes sure the last navigation state of the
-    // Navigator for the branch is restored.
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
