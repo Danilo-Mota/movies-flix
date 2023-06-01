@@ -10,7 +10,7 @@ abstract class GetPopularMoviesUseCaseProtocol {
 }
 
 class GetPopularMoviesUseCase extends GetPopularMoviesUseCaseProtocol {
-  final MoviesRoutes routes;
+  final MoviesRoutesProtocol routes;
 
   GetPopularMoviesUseCase({required this.routes});
 

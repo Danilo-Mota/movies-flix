@@ -12,8 +12,8 @@ import 'use_cases/get_similar_movies_use_case.dart';
 
 class DetailsViewModel extends DetailsViewProtocol implements MovieItemViewModelDelegate {
   final int movieId;
-  final GetMovieDetailsUseCase detailsUseCase;
-  final GetSimilarMoviesUseCase similarMoviesUseCase;
+  final GetMovieDetailsUseCaseProtocol detailsUseCase;
+  final GetSimilarMoviesUseCaseProtocol similarMoviesUseCase;
 
   MovieDetails? _details;
   bool _hasError = false;

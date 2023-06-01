@@ -8,7 +8,7 @@ import 'use_cases/get_search_movies.dart';
 
 class SearchViewModel extends SearchViewProtocol {
   final Localization l10n;
-  final GetSearchMoviesUseCase searchMoviesUseCase;
+  final GetSearchMoviesUseCaseProtocol searchMoviesUseCase;
 
   String? _errorMessage;
   bool _isLoading = false;

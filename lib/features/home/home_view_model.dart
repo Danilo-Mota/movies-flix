@@ -1,5 +1,6 @@
 import 'package:flutter_gen/gen_l10n/localization.dart';
 
+import '../../injection.dart';
 import '../../model/movies.dart';
 import '../../support/components/movies_item/movie_item_view.dart';
 import '../../support/components/movies_item/movie_item_view_model.dart';
@@ -20,17 +21,12 @@ class HomeViewModel extends HomeViewProtocol implements MovieItemViewModelDelega
   bool _isTopRatedMoviesLoading = false;
   bool _isUpcomingMoviesLoading = false;
 
-  final Localization l10n;
-  final GetPopularMoviesUseCase popularMovieUseCase;
-  final GetTopRatedMoviesUseCase topRatedMovieUseCase;
-  final GetUpcomingMoviesUseCase upcomingMovieUseCase;
+  final Localization l10n = getIt.get<Localization>();
+  final GetPopularMoviesUseCaseProtocol popularMovieUseCase = getIt.get<GetPopularMoviesUseCaseProtocol>();
+  final GetTopRatedMoviesUseCaseProtocol topRatedMovieUseCase = getIt.get<GetTopRatedMoviesUseCaseProtocol>();
+  final GetUpcomingMoviesUseCaseProtocol upcomingMovieUseCase = getIt.get<GetUpcomingMoviesUseCaseProtocol>();
 
-  HomeViewModel({
-    required this.l10n,
-    required this.topRatedMovieUseCase,
-    required this.popularMovieUseCase,
-    required this.upcomingMovieUseCase,
-  });
+  HomeViewModel();
 
   @override
   String get moviesErrorMessage => _moviesErrorMessage;

@@ -10,7 +10,7 @@ abstract class GetSearchMoviesUseCaseProtocol {
 }
 
 class GetSearchMoviesUseCase extends GetSearchMoviesUseCaseProtocol {
-  final MoviesRoutes routes;
+  final MoviesRoutesProtocol routes;
 
   GetSearchMoviesUseCase({required this.routes});
 

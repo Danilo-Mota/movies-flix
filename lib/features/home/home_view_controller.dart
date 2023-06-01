@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../injection.dart';
 import 'home_view.dart';
 
 abstract class HomeViewProtocol extends HomeViewModelProtocol {
@@ -11,20 +12,17 @@ abstract class HomeViewProtocol extends HomeViewModelProtocol {
 }
 
 class HomeViewController extends StatefulWidget {
-  final HomeViewProtocol viewModel;
-
-  const HomeViewController({super.key, required this.viewModel});
+  const HomeViewController({super.key});
 
   @override
   State<StatefulWidget> createState() => _HomeViewController();
 }
 
 class _HomeViewController extends State<HomeViewController> {
-  late final HomeViewProtocol viewModel;
+  final HomeViewProtocol viewModel = getIt.get<HomeViewProtocol>();
 
   @override
   void initState() {
-    viewModel = widget.viewModel;
     _bind();
     _getMovies();
     super.initState();
