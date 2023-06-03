@@ -12,12 +12,13 @@ final getIt = GetIt.instance;
 
 void setupInjector() {
   getIt.registerLazySingleton<Localization>(() => Localize.instance.l10n);
+
+  /// Home
   getIt.registerFactory<MoviesRoutesProtocol>(() => MoviesRoutes());
-  getIt.registerFactory<GetPopularMoviesUseCaseProtocol>(
-      () => GetPopularMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
-  getIt.registerFactory<GetTopRatedMoviesUseCaseProtocol>(
-      () => GetTopRatedMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
-  getIt.registerFactory<GetUpcomingMoviesUseCaseProtocol>(
-      () => GetUpcomingMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
+  getIt.registerFactory<GetPopularMoviesUseCaseProtocol>(() => GetPopularMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
+  getIt.registerFactory<GetTopRatedMoviesUseCaseProtocol>(() => GetTopRatedMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
+  getIt.registerFactory<GetUpcomingMoviesUseCaseProtocol>(() => GetUpcomingMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
   getIt.registerFactory<HomeViewProtocol>(() => HomeViewModel());
+
+  //TODO: Substituir as outras injeções de dependencia pelo service locator
 }

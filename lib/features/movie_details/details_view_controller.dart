@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'details_view.dart';
-import 'di/details_factory.dart';
 
 abstract class DetailsViewProtocol extends DetailsViewModelProtocol {
   void getMovieDetails();
@@ -13,6 +12,8 @@ abstract class DetailsViewProtocol extends DetailsViewModelProtocol {
 
 class DetailsViewController extends StatefulWidget {
   final DetailsViewProtocol viewModel;
+  static const String route = '/details';
+  static const String routePath = 'details';
 
   const DetailsViewController({super.key, required this.viewModel});
 
