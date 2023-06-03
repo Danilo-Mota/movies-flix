@@ -1,0 +1,238 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'localization_pt.dart';
+
+/// Callers can lookup localized strings with an instance of Localization
+/// returned by `Localization.of(context)`.
+///
+/// Applications need to include `Localization.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'gen_l10n/localization.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: Localization.localizationsDelegates,
+///   supportedLocales: Localization.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the Localization.supportedLocales
+/// property.
+abstract class Localization {
+  Localization(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static Localization? of(BuildContext context) {
+    return Localizations.of<Localization>(context, Localization);
+  }
+
+  static const LocalizationsDelegate<Localization> delegate = _LocalizationDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('pt')
+  ];
+
+  /// No description provided for @appTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Jeraflix - Danilo'**
+  String get appTitle;
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Home'**
+  String get homeTitle;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar'**
+  String get searchTitle;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get profileTitle;
+
+  /// No description provided for @popularMoviesLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os mais populares'**
+  String get popularMoviesLabel;
+
+  /// No description provided for @upcomingMoviesLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que vem por aí'**
+  String get upcomingMoviesLabel;
+
+  /// No description provided for @topRatedMoviesLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aclamados pela crítica'**
+  String get topRatedMoviesLabel;
+
+  /// No description provided for @learnMoreLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saiba mais'**
+  String get learnMoreLabel;
+
+  /// No description provided for @suggestionsForYouLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sugestões para você'**
+  String get suggestionsForYouLabel;
+
+  /// No description provided for @votesLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Votos: '**
+  String get votesLabel;
+
+  /// No description provided for @popularityLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Popularidade: '**
+  String get popularityLabel;
+
+  /// No description provided for @searchMovieLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pesquisar filme'**
+  String get searchMovieLabel;
+
+  /// No description provided for @authorNameLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do autor'**
+  String get authorNameLabel;
+
+  /// No description provided for @synopsisLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sinopse'**
+  String get synopsisLabel;
+
+  /// No description provided for @similarItemsLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Itens Similares'**
+  String get similarItemsLabel;
+
+  /// No description provided for @requestError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aconteceu um erro inesperado com os nossos servidores.'**
+  String get requestError;
+
+  /// No description provided for @timeoutError.
+  ///
+  /// In pt, this message translates to:
+  /// **'O tempo de requisição esgotou, tente novamente mais tarde.'**
+  String get timeoutError;
+
+  /// No description provided for @mappingFailureError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ocorreu um erro na requisição. Estamos trabalhando nisso!'**
+  String get mappingFailureError;
+
+  /// No description provided for @multipleAccountsLoggedError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parece que esta conta está sendo utilizada em outro dispositivo. Faça login novamente.'**
+  String get multipleAccountsLoggedError;
+}
+
+class _LocalizationDelegate extends LocalizationsDelegate<Localization> {
+  const _LocalizationDelegate();
+
+  @override
+  Future<Localization> load(Locale locale) {
+    return SynchronousFuture<Localization>(lookupLocalization(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) => <String>['pt'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_LocalizationDelegate old) => false;
+}
+
+Localization lookupLocalization(Locale locale) {
+
+
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'pt': return LocalizationPt();
+  }
+
+  throw FlutterError(
+    'Localization.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
+}
