@@ -8,6 +8,8 @@ import 'features/home/use_cases/get_top_rated_movies_use_case.dart';
 import 'features/home/use_cases/get_upcoming_movies_use_case.dart';
 import 'support/utils/localize.dart';
 
+/// Este trecho está fora do padrão de injeção de dependência para um Spike utilizando Service Locator
+
 final getIt = GetIt.instance;
 
 void setupInjector() {
@@ -19,6 +21,4 @@ void setupInjector() {
   getIt.registerFactory<GetTopRatedMoviesUseCaseProtocol>(() => GetTopRatedMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
   getIt.registerFactory<GetUpcomingMoviesUseCaseProtocol>(() => GetUpcomingMoviesUseCase(routes: getIt.get<MoviesRoutesProtocol>()));
   getIt.registerFactory<HomeViewProtocol>(() => HomeViewModel());
-
-  //TODO: Substituir as outras injeções de dependencia pelo service locator
 }

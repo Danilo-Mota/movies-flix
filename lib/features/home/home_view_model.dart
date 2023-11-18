@@ -21,6 +21,7 @@ class HomeViewModel extends HomeViewProtocol implements MovieItemViewModelDelega
   bool _isTopRatedMoviesLoading = false;
   bool _isUpcomingMoviesLoading = false;
 
+/// Este trecho está fora do padrão de injeção de dependência para um Spike utilizando Service Locator
   final Localization l10n = getIt.get<Localization>();
   final GetPopularMoviesUseCaseProtocol popularMovieUseCase = getIt.get<GetPopularMoviesUseCaseProtocol>();
   final GetTopRatedMoviesUseCaseProtocol topRatedMovieUseCase = getIt.get<GetTopRatedMoviesUseCaseProtocol>();
